@@ -1,0 +1,28 @@
+
+
+
+
+VERİ TOPLAMA
+1- Denetçi raporlarını okuyarak veriyi çekmek
+2- Rapor içerisindeki kritik seviyeler belirlenir (1-2-3)
+
+
+VERİTABANI
+1- MySQL tablosu oluşturulmalı
+   -Denetim Tablosu (Ağ Güvenliği, Erişim Kontrolleri vbvb)
+   -Önlem Tablosu (Önlem seviyeleri, gereklilik, açıklamalar vb)
+   -Denetçi Raporları (Denetçinin dökümanı ve analizi)
+
+YAPAY ZEKA KULLANIMI
+1- Natural Language Processing(NLP) ile risk sınıflandırılması
+2- Raporda bulunan eksikliklere göre otomatik güvenlik tedbiri ve uygulaması gerekilen adımları yazan sistem.
+3- Chatbot ile eksiklikler, çözümler tartışılabilir.
+4- Yapay zeka ile sistemde çıkan sürekli problemler belirtilebilir
+
+WEB ARAYÜZÜ
+1- Denetçiler için kullanıcı giriş paneli
+2- Rapor yükleme alanı
+3- Otomatik analiz ve öneriler 
+4- Rapor çıktısı 
+5- Denetçi Dashboardı olabilir sık karşılaşılan açıklar eklenebilir
+6- Denetlenen kurumlara rapora bağlı 100 üzerinden skor verilebilir
