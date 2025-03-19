@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRSiber - Admin Paneli</title>
+    <link rel="stylesheet" href="../assets/css/admin_panel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="../yatay_logo.avif" alt="TRSiber Logo" class="logo">
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active">
+                    <a href="#dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="#denetciler"><i class="fas fa-users"></i> Denetçiler</a>
+                </li>
+                <li>
+                    <a href="#kurumlar"><i class="fas fa-building"></i> Kurumlar</a>
+                </li>
+                <li>
+                    <a href="#denetimler"><i class="fas fa-tasks"></i> Denetimler</a>
+                </li>
+                <li>
+                    <a href="#raporlar"><i class="fas fa-file-alt"></i> Raporlar</a>
+                </li>
+                <li>
+                    <a href="#loglar"><i class="fas fa-history"></i> Log Kayıtları</a>
+                </li>
+                <li>
+                    <a href="#ayarlar"><i class="fas fa-cog"></i> Ayarlar</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Ana İçerik -->
+    <main class="main-content">
+        <header class="top-header">
+            <div class="header-search">
+                <input type="text" placeholder="Ara...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="header-right">
+                <div class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </div>
+                <div class="admin-profile">
+                    <img src="../assets/images/admin-avatar.png" alt="Admin" class="avatar">
+                    <div class="admin-info">
+                        <span class="admin-name">Admin User</span>
+                        <span class="admin-role">Super Admin</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard -->
+        <div class="dashboard-content">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Toplam Denetçi</h3>
+                        <p class="stat-number">24</p>
+                        <span class="stat-change positive">+2 bu ay</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Aktif Kurum</h3>
+                        <p class="stat-number">156</p>
+                        <span class="stat-change positive">+12 bu ay</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Devam Eden Denetim</h3>
+                        <p class="stat-number">18</p>
+                        <span class="stat-change neutral">-3 geçen aya göre</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Tamamlanan Denetim</h3>
+                        <p class="stat-number">342</p>
+                        <span class="stat-change positive">+28 bu ay</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>Aylık Denetim İstatistikleri</h3>
+                    <canvas id="denetimChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Sektör Dağılımı</h3>
+                    <canvas id="sektorChart"></canvas>
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <h3>Son Aktiviteler</h3>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="activity-details">
+                            <p>Yeni denetim raporu yüklendi</p>
+                            <span class="activity-time">2 saat önce</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="activity-details">
+                            <p>Yeni denetçi eklendi</p>
+                            <span class="activity-time">5 saat önce</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="activity-details">
+                            <p>Yeni kurum kaydı oluşturuldu</p>
+                            <span class="activity-time">1 gün önce</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Grafik verilerini yükle
+        window.onload = function() {
+            // Denetim istatistikleri grafiği
+            const denetimCtx = document.getElementById('denetimChart').getContext('2d');
+            new Chart(denetimCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran'],
+                    datasets: [{
+                        label: 'Tamamlanan Denetimler',
+                        data: [45, 59, 80, 81, 56, 55],
+                        borderColor: '#4CAF50',
+                        tension: 0.1
+                    }, {
+                        label: 'Devam Eden Denetimler',
+                        data: [28, 48, 40, 19, 86, 27],
+                        borderColor: '#2196F3',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Sektör dağılımı grafiği
+            const sektorCtx = document.getElementById('sektorChart').getContext('2d');
+            new Chart(sektorCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Finans', 'Teknoloji', 'Sağlık', 'Eğitim', 'Diğer'],
+                    datasets: [{
+                        data: [30, 25, 15, 10, 20],
+                        backgroundColor: [
+                            '#4CAF50',
+                            '#2196F3',
+                            '#FFC107',
+                            '#9C27B0',
+                            '#607D8B'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        };
+
+        // Sidebar aktif menü
+        document.querySelectorAll('.sidebar-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector('.sidebar-nav li.active').classList.remove('active');
+                this.parentElement.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html> 
