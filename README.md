@@ -39,7 +39,6 @@ Bu proje, bilişim güvenliği denetçileri için geliştirilen bir **web tabanl
 | **Frontend** | HTML, CSS, JavaScript |
 | **Backend** | Node.js |
 | **Veritabanı** | MySQL |
-| **Güvenlik** | Hashing (Bcrypt, Argon2), JWT Authentication |
 | **Kod Kalitesi** | SonarQube ile analiz |
 | **Proje Yönetimi** | Scrum & GitHub Projects |
 
