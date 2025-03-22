@@ -1,8 +1,10 @@
 [build]
-publish = "pages"
-command = ""
+  base = "TRSIBER_BIGDES"
+  publish = "TRSIBER_BIGDES/pages"
+  command = ""
+
 
 [[redirects]]
 from = "/*"
-to = "index.html"
+to = "/index.html"
 status = 200
