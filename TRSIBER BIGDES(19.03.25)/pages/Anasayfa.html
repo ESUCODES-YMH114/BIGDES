@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRSiber - Denetçi Paneli</title>
+    <link rel="stylesheet" href="../assets/css/anasayfa.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="body-particles" class="body-particles-container"></div>
+    <!-- Header -->
+    <header class="header">
+        <div id="header-particles" class="header-particles-container"></div>
+        <div class="header-container">
+            <div class="logo">
+                <img src="../assets/images/yatay_logo.avif" alt="TRSiber Logo">
+            </div>
+            <div class="settings-menu">
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-user-circle"></i>
+                    <span class="denetci-isim" id="denetciIsmi">Yükleniyor...</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="settings-dropdown" id="settingsDropdown">
+                    <a href="profil.html"><i class="fas fa-user"></i> Profil</a>
+                    <a href="denetimlerim.html"><i class="fas fa-list"></i> Denetimlerim</a>
+                    <a href="loginpage.html" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="upload-section">
+            <h1>Dosya Yükleme</h1>
+            <p>Denetim için dosyanızı buraya yükleyin</p>
+            
+            <div class="upload-container">
+                <div class="upload-box" id="dropZone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Dosyayı sürükleyin veya seçin</p>
+                    <input type="file" id="fileInput" hidden>
+                    <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                        Dosya Seç
+                    </button>
+                </div>
+                <div class="upload-status" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                    <p class="status-text">Yükleniyor... 0%</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div id="particles-js" class="particles-container"></div>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="../assets/images/logo.avif" alt="TRSiber Animasyonlu Logo" class="animated-logo">
+            </div>
+            
+            <div class="footer-contact">
+                <h3>İletişim Bilgileri</h3>
+                <p><i class="fas fa-envelope"></i> info@trsiber.com.tr</p>
+                <p><i class="fas fa-phone"></i> +90 (XXX) XXX XX XX</p>
+                <p><i class="fas fa-map-marker-alt"></i> Beştepe Mah. Nergiz Sok. No: 7-2 Via Flat İş Merkezi Kat:3 İç Kapı No: 87 Yenimahalle/ANKARA</p>
+            </div>
+            
+            <div class="footer-map">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3059.0447957772997!2d32.80618441744384!3d39.91441687932577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34fc8d3683f9b%3A0x12e05b591a97b14b!2sVIA%20Flat!5e0!3m2!1str!2str!4v1710280581010!5m2!1str!2str"
+                    width="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+        <div class="developer-credit">esucodes tarafından geliştirildi</div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="../assets/js/particles/particles_body.js"></script>
+    <script src="../assets/js/particles/particles_header.js"></script>
+    <script src="../assets/js/particles/particles_footer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Denetçi bilgilerini yükle
+            const userData = JSON.parse(localStorage.getItem('user'));
+            if (!userData) {
+                window.location.href = 'loginpage.html';
+                return;
+            }
+
+            // Kullanıcı adını göster
+            const denetciIsmiElement = document.getElementById('denetciIsmi');
+            denetciIsmiElement.textContent = `${userData.name} ${userData.surname}`;
+
+            // Dropdown menü işlemleri
+            const settingsBtn = document.getElementById('settingsBtn');
+            const settingsDropdown = document.getElementById('settingsDropdown');
+            let isDropdownOpen = false;
+
+            // Menüyü aç/kapat
+            settingsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                isDropdownOpen = !isDropdownOpen;
+                settingsDropdown.classList.toggle('active');
+                
+                if (isDropdownOpen) {
+                    setTimeout(() => {
+                        document.addEventListener('click', closeDropdown);
+                    }, 0);
+                }
+            });
+
+            // Menüyü kapat
+            function closeDropdown(e) {
+                if (!settingsDropdown.contains(e.target) && !settingsBtn.contains(e.target)) {
+                    settingsDropdown.classList.remove('active');
+                    isDropdownOpen = false;
+                    document.removeEventListener('click', closeDropdown);
+                }
+            }
+
+            // Menü öğelerine tıklama
+            settingsDropdown.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.id === 'logoutBtn') {
+                        e.preventDefault();
+                        localStorage.removeItem('user');
+                        window.location.href = 'loginpage.html';
+                    }
+                });
+            });
+
+            // Dosya yükleme işlemleri için
+            const dropZone = document.getElementById('dropZone');
+            const fileInput = document.getElementById('fileInput');
+            const uploadStatus = document.querySelector('.upload-status');
+            const progressBar = document.querySelector('.progress');
+            const statusText = document.querySelector('.status-text');
+
+            // Drag & Drop olayları
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('drag-over');
+            });
+
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('drag-over');
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('drag-over');
+                const files = e.dataTransfer.files;
+                handleFiles(files);
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+
+            function handleFiles(files) {
+                if (files.length > 0) {
+                    const file = files[0];
+                    uploadStatus.style.display = 'block';
+                    simulateUpload();
+                }
+            }
+
+            function simulateUpload() {
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 5;
+                    progressBar.style.width = progress + '%';
+                    statusText.textContent = `Yükleniyor... ${progress}%`;
+                    
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        statusText.textContent = 'Yükleme tamamlandı!';
+                        setTimeout(() => {
+                            uploadStatus.style.display = 'none';
+                            progressBar.style.width = '0%';
+                        }, 2000);
+                    }
+                }, 200);
+            }
+        });
+    </script>
+</body>
+</html> 

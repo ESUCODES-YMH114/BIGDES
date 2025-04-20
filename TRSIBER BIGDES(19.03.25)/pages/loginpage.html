@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRSiber - Giriş</title>
+    <link rel="stylesheet" href="../assets/css/loginpage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <div class="content-wrapper">
+        <div class="card">
+            <div class="logo">
+                <img src="../assets/images/yatay_logo.avif" alt="TRSiber Logo" onerror="this.src='../assets/images/logo.avif'">
+            </div>
+            <h1>Bilgi ve İletişim Güvenliği Rehberi</h1>
+            <p>Uyum ve Denetim Sistemi</p>
+            
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="E-posta adresiniz" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Şifreniz" required>
+                </div>
+                <div class="buttons">
+                    <button type="submit" class="login-btn">Giriş Yap</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="../assets/js/particles/particles_login.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    window.location.href = 'Anasayfa.html';
+                } else {
+                    alert(data.error || 'Giriş başarısız');
+                }
+            } catch (error) {
+                console.error('Giriş hatası:', error);
+                alert('Giriş yapılırken bir hata oluştu');
+            }
+        });
+    </script>
+</body>
+</html> 

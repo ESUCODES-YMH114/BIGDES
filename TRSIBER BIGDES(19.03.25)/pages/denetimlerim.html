@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRSiber - Denetimlerim</title>
+    <link rel="stylesheet" href="../assets/css/denetimlerim.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/exceljs/dist/exceljs.min.js"></script>
+</head>
+<body>
+    <div id="body-particles" class="body-particles-container"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div id="header-particles" class="header-particles-container"></div>
+        <div class="header-container">
+            <div class="logo">
+                <img src="../images/yatay_logo.avif" alt="TRSiber Logo">
+            </div>
+            <div class="settings-menu">
+                <button class="settings-btn">
+                    <i class="fas fa-user-circle"></i>
+                    <span class="denetci-isim" id="denetciIsmi">Yükleniyor...</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="settings-dropdown">
+                    <a href="Anasayfa.html"><i class="fas fa-home"></i> Ana Sayfa</a>
+                    <a href="profil.html"><i class="fas fa-user"></i> Profil</a>
+                    <a href="loginpage.html"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="denetim-container">
+            <!-- Denetim Filtreleri -->
+            <div class="denetim-filters">
+                <div class="search-bar">
+                    <input type="text" placeholder="Denetim ara..." id="denetimSearch">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Tümü</button>
+                    <button class="filter-btn" data-filter="completed">Tamamlanan</button>
+                    <button class="filter-btn" data-filter="ongoing">Devam Eden</button>
+                </div>
+            </div>
+
+            <!-- Denetim Listesi -->
+            <div class="denetim-list">
+                <!-- Denetim Kartı Template -->
+                <div class="denetim-card" onclick="showDenetimDetails(1)">
+                    <div class="denetim-header">
+                        <div class="denetim-title">
+                            <h3>Web Uygulama Güvenlik Denetimi</h3>
+                            <span class="status completed">Tamamlandı</span>
+                        </div>
+                        <div class="denetim-actions">
+                            <button class="download-btn" title="Denetimi İndir">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="denetim-details">
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Başlangıç: 01.03.2024</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Bitiş: 15.03.2024</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-building"></i>
+                            <span>Kurum: ABC Şirketi</span>
+                        </div>
+                    </div>
+                    <div class="denetim-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 100%"></div>
+                        </div>
+                        <span class="progress-text">100%</span>
+                    </div>
+                </div>
+
+                <!-- Devam Eden Denetim Örneği -->
+                <div class="denetim-card" onclick="showDenetimDetails(2)">
+                    <div class="denetim-header">
+                        <div class="denetim-title">
+                            <h3>Mobil Uygulama Güvenlik Denetimi</h3>
+                            <span class="status ongoing">Devam Ediyor</span>
+                        </div>
+                        <div class="denetim-actions">
+                            <button class="download-btn" title="Denetimi İndir" disabled>
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="denetim-details">
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Başlangıç: 10.03.2024</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Tahmini Bitiş: 25.03.2024</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-building"></i>
+                            <span>Kurum: XYZ Şirketi</span>
+                        </div>
+                    </div>
+                    <div class="denetim-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 60%"></div>
+                        </div>
+                        <span class="progress-text">60%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Denetim Detay Modal -->
+    <div id="denetimModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Denetim Detayları</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="denetimDetails">
+                    <!-- Denetim detayları buraya yüklenecek -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div id="particles-js" class="particles-container"></div>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="../images/logo.avif" alt="TRSiber Animasyonlu Logo" class="animated-logo">
+            </div>
+            
+            <div class="footer-contact">
+                <h3>İletişim Bilgileri</h3>
+                <p><i class="fas fa-envelope"></i> info@trsiber.com.tr</p>
+                <p><i class="fas fa-phone"></i> +90 (XXX) XXX XX XX</p>
+                <p><i class="fas fa-map-marker-alt"></i> Beştepe Mah. Nergiz Sok. No: 7-2 Via Flat İş Merkezi Kat:3 İç Kapı No: 87 Yenimahalle/ANKARA</p>
+            </div>
+            
+            <div class="footer-map">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3059.0447957772997!2d32.80618441744384!3d39.91441687932577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34fc8d3683f9b%3A0x12e05b591a97b14b!2sVIA%20Flat!5e0!3m2!1str!2str!4v1710280581010!5m2!1str!2str"
+                    width="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+        <div class="developer-credit">esucodes tarafından geliştirildi</div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="../assets/js/particles/particles_body.js"></script>
+    <script src="../assets/js/particles/particles_header.js"></script>
+    <script src="../assets/js/particles/particles_footer.js"></script>
+    <script>
+        // Oturum kontrolü ve kullanıcı bilgilerini yükleme
+        function checkAuth() {
+            const userData = JSON.parse(localStorage.getItem('user'));
+            if (!userData) {
+                window.location.href = 'loginpage.html';
+                return;
+            }
+
+            // Kullanıcı adını göster
+            document.getElementById('denetciIsmi').textContent = `${userData.name} ${userData.surname}`;
+        }
+
+        // Sayfa yüklendiğinde oturum kontrolü yap
+        document.addEventListener('DOMContentLoaded', checkAuth);
+
+        // Çıkış yap butonu için event listener
+        document.querySelector('a[href="loginpage.html"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'loginpage.html';
+        });
+
+        // Ayarlar menüsü için
+        document.querySelector('.settings-btn').addEventListener('click', function() {
+            document.querySelector('.settings-dropdown').classList.toggle('active');
+        });
+
+        // Denetimleri filtrele
+        function denetimleriFiltrele(filter) {
+            const denetimCards = document.querySelectorAll('.denetim-card');
+            denetimCards.forEach(card => {
+                const status = card.querySelector('.status').classList.contains(filter);
+                if (filter === 'all' || status) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Denetimleri ara
+        function denetimleriAra(searchText) {
+            const denetimCards = document.querySelectorAll('.denetim-card');
+            denetimCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const kurum = card.querySelector('.detail-item:last-child span').textContent.toLowerCase();
+                
+                if (title.includes(searchText.toLowerCase()) || kurum.includes(searchText.toLowerCase())) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filtre butonları için event listener
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    denetimleriFiltrele(this.getAttribute('data-filter'));
+                });
+            });
+
+            // Arama kutusu için event listener
+            const searchInput = document.getElementById('denetimSearch');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    denetimleriAra(this.value);
+                });
+            }
+
+            // İndirme butonları için event listener
+            document.querySelectorAll('.download-btn:not([disabled])').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const denetimTitle = this.closest('.denetim-card').querySelector('h3').textContent;
+                    alert(`${denetimTitle} denetimi indiriliyor...`);
+                });
+            });
+        });
+
+        // Modal işlemleri
+        function showDenetimDetails(denetimId) {
+            const modal = document.getElementById('denetimModal');
+            const detailsContainer = document.getElementById('denetimDetails');
+            
+            // API'den denetim detaylarını al
+            fetchDenetimDetails(denetimId)
+                .then(details => {
+                    // Detayları modal içeriğine yerleştir
+                    detailsContainer.innerHTML = generateDetailHTML(details);
+                    modal.style.display = 'flex';
+                })
+                .catch(error => {
+                    console.error('Denetim detayları alınamadı:', error);
+                    detailsContainer.innerHTML = '<p>Denetim detayları yüklenirken bir hata oluştu.</p>';
+                    modal.style.display = 'flex';
+                });
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('denetimModal');
+            modal.style.display = 'none';
+        }
+
+        // API'den denetim detaylarını al
+        async function fetchDenetimDetails(denetimId) {
+            try {
+                const response = await fetch(`/api/denetimler/${denetimId}`);
+                if (!response.ok) {
+                    throw new Error('Denetim detayları alınamadı');
+                }
+                return await response.json();
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        // Detay HTML'ini oluştur
+        function generateDetailHTML(details) {
+            return `
+                <div class="denetim-detail-container">
+                    <div class="detail-group">
+                        <h3>Denetim Bilgileri</h3>
+                        <p><strong>Denetim ID:</strong> ${details.id}</p>
+                        <p><strong>Kurum:</strong> ${details.kurum}</p>
+                        <p><strong>Başlangıç Tarihi:</strong> ${details.baslangicTarihi}</p>
+                        <p><strong>Bitiş Tarihi:</strong> ${details.bitisTarihi}</p>
+                        <p><strong>Durum:</strong> <span class="status ${details.durum.toLowerCase()}">${details.durum}</span></p>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <h3>Satır Etkinliği</h3>
+                        <div class="satir-etkinligi-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Satır Etkinleri</th>
+                                        <th>Etkin</th>
+                                        <th>Etkin Değil</th>
+                                        <th>Kısmen Etkin</th>
+                                        <th>(boş)</th>
+                                        <th>Genel Toplam</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>AS-01</td>
+                                        <td>132</td>
+                                        <td>3</td>
+                                        <td>13</td>
+                                        <td>20</td>
+                                        <td>168</td>
+                                    </tr>
+                                    <tr>
+                                        <td>U-02</td>
+                                        <td>77</td>
+                                        <td>9</td>
+                                        <td>6</td>
+                                        <td>1</td>
+                                        <td>93</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ToC-01</td>
+                                        <td>7</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>5</td>
+                                        <td>14</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IoT-01</td>
+                                        <td>16</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>16</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FM-02</td>
+                                        <td>17</td>
+                                        <td>2</td>
+                                        <td>2</td>
+                                        <td>0</td>
+                                        <td>21</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P-01</td>
+                                        <td>28</td>
+                                        <td>0</td>
+                                        <td>4</td>
+                                        <td>20</td>
+                                        <td>52</td>
+                                    </tr>
+                                    <tr class="total-row">
+                                        <td><strong>Genel Toplam</strong></td>
+                                        <td><strong>277</strong></td>
+                                        <td><strong>16</strong></td>
+                                        <td><strong>26</strong></td>
+                                        <td><strong>46</strong></td>
+                                        <td><strong>365</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-actions">
+                            <button class="btn secondary" onclick="downloadEtkinlikTable(${details.id})">
+                                <i class="fas fa-download"></i> Etkinlik Tablosunu İndir
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <h3>Denetçi Bilgileri</h3>
+                        <p><strong>Denetçi:</strong> ${details.denetci}</p>
+                        <p><strong>İletişim:</strong> ${details.iletisim}</p>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <h3>Denetim Kapsamı</h3>
+                        <p>${details.kapsam}</p>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <h3>Bulgular</h3>
+                        <ul class="bulgular-list">
+                            ${details.bulgular?.map(bulgu => `
+                                <li>
+                                    <span class="bulgu-seviye ${bulgu.seviye.toLowerCase()}">${bulgu.seviye}</span>
+                                    <p>${bulgu.aciklama}</p>
+                                </li>
+                            `).join('') || 'Henüz bulgu girilmemiş.'}
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-actions">
+                        <button class="btn primary" onclick="downloadReport(${details.id})">
+                            <i class="fas fa-download"></i> Raporu İndir
+                        </button>
+                        <button class="btn secondary" onclick="exportFindings(${details.id})">
+                            <i class="fas fa-file-export"></i> Bulguları Dışa Aktar
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Rapor indirme işlemi
+        async function downloadReport(denetimId) {
+            try {
+                const response = await fetch(`/api/denetimler/${denetimId}/rapor`);
+                if (!response.ok) throw new Error('Rapor indirilemedi');
+                
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `denetim-raporu-${denetimId}.pdf`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                a.remove();
+            } catch (error) {
+                console.error('Rapor indirme hatası:', error);
+                alert('Rapor indirme işlemi başarısız oldu.');
+            }
+        }
+
+        // Bulguları dışa aktarma işlemi
+        async function exportFindings(denetimId) {
+            try {
+                const response = await fetch(`/api/denetimler/${denetimId}/bulgular/export`);
+                if (!response.ok) throw new Error('Bulgular dışa aktarılamadı');
+                
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `denetim-bulgular-${denetimId}.xlsx`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                a.remove();
+            } catch (error) {
+                console.error('Bulgu dışa aktarma hatası:', error);
+                alert('Bulgular dışa aktarılamadı.');
+            }
+        }
+
+        // Etkinlik tablosunu indirme fonksiyonu
+        async function downloadEtkinlikTable(denetimId) {
+            try {
+                // Excel dosyası oluştur
+                const workbook = new ExcelJS.Workbook();
+                const worksheet = workbook.addWorksheet('Satır Etkinliği');
+
+                // Başlıkları ekle
+                worksheet.addRow(['Satır Etkinleri', 'Etkin', 'Etkin Değil', 'Kısmen Etkin', '(boş)', 'Genel Toplam']);
+
+                // Verileri ekle
+                worksheet.addRow(['AS-01', 132, 3, 13, 20, 168]);
+                worksheet.addRow(['U-02', 77, 9, 6, 1, 93]);
+                worksheet.addRow(['ToC-01', 7, 1, 1, 5, 14]);
+                worksheet.addRow(['IoT-01', 16, 0, 0, 0, 16]);
+                worksheet.addRow(['FM-02', 17, 2, 2, 0, 21]);
+                worksheet.addRow(['P-01', 28, 0, 4, 20, 52]);
+                worksheet.addRow(['Genel Toplam', 277, 16, 26, 46, 365]);
+
+                // Dosyayı indir
+                const buffer = await workbook.xlsx.writeBuffer();
+                const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `satir-etkinligi-${denetimId}.xlsx`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                a.remove();
+            } catch (error) {
+                console.error('Tablo indirme hatası:', error);
+                alert('Tablo indirme işlemi başarısız oldu.');
+            }
+        }
+
+        // Modal dışına tıklandığında kapatma
+        window.onclick = function(event) {
+            const modal = document.getElementById('denetimModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html> 
