@@ -17,10 +17,10 @@ app.get('/', (req, res) => {
 
 // MySQL bağlantısı
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'trsiber'
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '',
+    database: process.env.DB_NAME || 'trsiber'
 });
 
 connection.connect((err) => {
@@ -62,7 +62,7 @@ app.post('/login', (req, res) => {
     });
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Sunucu ${PORT} portunda çalışıyor`);
 }); 

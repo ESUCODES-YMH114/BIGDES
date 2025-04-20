@@ -1,3 +1,6 @@
+-- Veritabanını oluştur
+CREATE DATABASE IF NOT EXISTS trsiber;
+USE trsiber;
 
 -- Users tablosunu oluştur
 CREATE TABLE IF NOT EXISTS users (
@@ -11,6 +14,6 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Örnek kullanıcıları ekle
 INSERT INTO users (name, surname, email, username, password) VALUES
-('Eren', 'Yılmaz', 'eren@eren.com', 'erenyilmaz', '$2b$12$xKt.cg8ZIZuyIJ0dFM.Jpunxvhm92.S8dDJBU.oDNkXA54xZE0HVm'),
+('Eren', 'Yılmaz', 'eren@eren.com', 'erenyilmaz', '123456'),
 ('Ahmet', 'Kaya', 'ahmet@ahmet.com', 'ahmetkaya', '123456'),
 ('Ayşe', 'Demir', 'ayse@ayse.com', 'aysedemir', '123456'); 
