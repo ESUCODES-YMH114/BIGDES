@@ -1,65 +1,53 @@
 const express = require('express');
-const mysql = require('mysql');
+const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+require('dotenv').config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Ana dizini statik dosyalar için ayarla
-app.use(express.static(path.join(__dirname, '../../')));
+// MongoDB bağlantısı
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log('MongoDB bağlantısı başarılı'))
+    .catch(err => console.error('MongoDB bağlantı hatası:', err));
+
+// User modelini import et
+const User = require('./models/User');
+
+// Statik dosyaları serve et
+app.use(express.static(path.join(__dirname, '../../pages')));
 
 // Ana sayfayı yönlendir
 app.get('/', (req, res) => {
-    res.redirect('/pages/loginpage.html');
-});
-
-// MySQL bağlantısı
-const connection = mysql.createConnection({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'trsiber'
-});
-
-connection.connect((err) => {
-    if (err) {
-        console.error('MySQL bağlantı hatası:', err);
-        return;
-    }
-    console.log('MySQL veritabanına bağlandı');
+    res.sendFile(path.join(__dirname, '../../pages/index.html'));
 });
 
 // Kullanıcı girişi
-app.post('/login', (req, res) => {
-    const { email, password } = req.body;
+app.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findOne({ email, password });
 
-    const sql = 'SELECT * FROM users WHERE email = ? AND password = ?';
-    connection.query(sql, [email, password], (err, results) => {
-        if (err) {
-            console.error('Sorgu hatası:', err);
-            res.status(500).json({ error: 'Giriş başarısız' });
-            return;
+        if (!user) {
+            return res.status(401).json({ error: 'Geçersiz email veya şifre' });
         }
 
-        if (results.length === 0) {
-            res.status(401).json({ error: 'Geçersiz email veya şifre' });
-            return;
-        }
-
-        const user = results[0];
         res.json({
             success: true,
             user: {
-                id: user.id,
+                id: user._id,
                 name: user.name,
                 surname: user.surname,
                 email: user.email,
                 username: user.username
             }
         });
-    });
+    } catch (error) {
+        console.error('Giriş hatası:', error);
+        res.status(500).json({ error: 'Giriş başarısız' });
+    }
 });
 
 const PORT = process.env.PORT || 3000;
