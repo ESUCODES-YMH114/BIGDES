@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGODB_URI)
 const User = require('./models/User');
 
 // Statik dosyaları serve et
-app.use(express.static(path.join(__dirname, '../../pages')));
+app.use(express.static(path.join(__dirname, '../../')));
 
 // Ana sayfayı yönlendir
 app.get('/', (req, res) => {
