@@ -24,6 +24,23 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../../pages/index.html'));
 });
 
+// Diğer sayfalar için route'lar
+app.get('/Anasayfa.html', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../pages/Anasayfa.html'));
+});
+
+app.get('/profil.html', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../pages/profil.html'));
+});
+
+app.get('/admin_panel.html', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../pages/admin_panel.html'));
+});
+
+app.get('/denetimlerim.html', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../pages/denetimlerim.html'));
+});
+
 // Kullanıcı girişi
 app.post('/login', async (req, res) => {
     try {
