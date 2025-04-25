@@ -47,26 +47,35 @@ app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         
-        // Sadece email loglanabilir, şifre asla loglanmamalı
+        // Sadece email loglanabilir, şifre asla şifre değerini loglamayın!
         console.log(`Giriş denemesi: ${email}`);
         
         // Şifre ile birlikte kullanıcıyı bul (normalde select:false olduğu için)
         const user = await User.findOne({ email }).select('+password');
 
-        // Kullanıcı bulunamadıysa veya şifre eşleşmiyorsa
+        console.log(`Kullanıcı bulundu mu?: ${!!user}`);
+        
+        // Kullanıcı bulunamadıysa
         if (!user) {
+            console.log(`Kullanıcı bulunamadı: ${email}`);
             return res.status(401).json({ error: 'Giriş başarısız' });
         }
 
+        console.log(`Veritabanındaki hash: ${user.password}`);
+        
         // Şifre doğrulama - bcrypt.compare kullanarak
         const isPasswordValid = await bcrypt.compare(password, user.password);
         
+        console.log(`Şifre eşleşmesi: ${isPasswordValid}`);
+        
         if (!isPasswordValid) {
             // Başarısız girişlerde özel hata mesajı yok
+            console.log(`Şifre eşleşmedi: ${email}`);
             return res.status(401).json({ error: 'Giriş başarısız' });
         }
 
         // Başarılı giriş durumunda
+        console.log(`Başarılı giriş: ${email}`);
         res.json({
             success: true,
             user: {
@@ -80,7 +89,7 @@ app.post('/login', async (req, res) => {
         });
     } catch (error) {
         // Genel hata durumunda spesifik hata vermeden genel bir mesaj döndür
-        console.error('Bir hata oluştu');
+        console.error('Bir hata oluştu:', error);
         res.status(500).json({ error: 'Giriş başarısız' });
     }
 });
