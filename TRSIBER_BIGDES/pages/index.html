@@ -66,11 +66,11 @@
                     localStorage.setItem('user', JSON.stringify(data.user));
                     window.location.href = 'Anasayfa.html';
                 } else {
-                    alert(data.error || 'Giriş başarısız');
+                    alert('Giriş başarısız');
                 }
             } catch (error) {
-                console.error('Giriş hatası:', error);
-                alert('Giriş yapılırken bir hata oluştu');
+                console.error('Bir hata oluştu');
+                alert('Giriş başarısız');
             }
         });
     </script>

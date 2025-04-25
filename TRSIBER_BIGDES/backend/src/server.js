@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
+const bcrypt = require('bcrypt');
 
 const app = express();
 app.use(cors());
@@ -45,12 +46,27 @@ app.get('/denetimlerim.html', (req, res) => {
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await User.findOne({ email, password });
+        
+        // Sadece email loglanabilir, şifre asla loglanmamalı
+        console.log(`Giriş denemesi: ${email}`);
+        
+        // Şifre ile birlikte kullanıcıyı bul (normalde select:false olduğu için)
+        const user = await User.findOne({ email }).select('+password');
 
+        // Kullanıcı bulunamadıysa veya şifre eşleşmiyorsa
         if (!user) {
-            return res.status(401).json({ error: 'Geçersiz email veya şifre' });
+            return res.status(401).json({ error: 'Giriş başarısız' });
         }
 
+        // Şifre doğrulama - bcrypt.compare kullanarak
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        
+        if (!isPasswordValid) {
+            // Başarısız girişlerde özel hata mesajı yok
+            return res.status(401).json({ error: 'Giriş başarısız' });
+        }
+
+        // Başarılı giriş durumunda
         res.json({
             success: true,
             user: {
@@ -59,10 +75,12 @@ app.post('/login', async (req, res) => {
                 surname: user.surname,
                 email: user.email,
                 username: user.username
+                // Şifreyi client'a gönderme
             }
         });
     } catch (error) {
-        console.error('Giriş hatası:', error);
+        // Genel hata durumunda spesifik hata vermeden genel bir mesaj döndür
+        console.error('Bir hata oluştu');
         res.status(500).json({ error: 'Giriş başarısız' });
     }
 });
