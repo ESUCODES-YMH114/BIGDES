@@ -6,7 +6,17 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 
 const app = express();
-app.use(cors());
+
+// CORS ayarlarını güvenli hale getir
+const corsOptions = {
+    origin: 'https://bigdes-3lh1.onrender.com',
+    optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
+
+// X-Powered-By header'ını kaldır
+app.disable('x-powered-by');
+
 app.use(express.json());
 
 // MongoDB bağlantısı
