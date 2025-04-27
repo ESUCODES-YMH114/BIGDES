@@ -14,7 +14,9 @@
         <div id="header-particles" class="header-particles-container"></div>
         <div class="header-container">
             <div class="logo">
+                <a href=""> <!--BURASI LOGOYA TIKLANDIĞINDA GİDİLECEK DOSYANIN UZANTISI OLACAK-->
                 <img src="../assets/images/yatay_logo.avif" alt=" Logo">
+            </a>
             </div>
             <div class="settings-menu">
                 <button class="settings-btn" id="settingsBtn">
@@ -22,10 +24,10 @@
                     <span class="denetci-isim" id="denetciIsmi">Yükleniyor...</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
-                <div class="settings-dropdown" id="settingsDropdown">
+                <div class="settings-dropdown" id="settingsDropdown"> <!--MENUDE BULUNAN SEÇENEKLER-->
                     <a href="profil.html"><i class="fas fa-user"></i> Profil</a>
                     <a href="denetimlerim.html"><i class="fas fa-list"></i> Denetimlerim</a>
-                    <a href="loginpage.html" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                    <a href="index.html" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
                 </div>
             </div>
         </div>
@@ -136,7 +138,7 @@
                     if (link.id === 'logoutBtn') {
                         e.preventDefault();
                         localStorage.removeItem('user');
-                        window.location.href = 'loginpage.html';
+                        window.location.href = 'index.html';
                     }
                 });
             });

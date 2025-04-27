@@ -26,7 +26,7 @@
                 <div class="settings-dropdown">
                     <a href="Anasayfa.html"><i class="fas fa-home"></i> Ana Sayfa</a>
                     <a href="denetimlerim.html"><i class="fas fa-list"></i> Denetimlerim</a>
-                    <a href="loginpage.html"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                    <a href="index.html"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
                 </div>
             </div>
         </div>
@@ -97,19 +97,31 @@
                         <h2>Profil Bilgileri</h2>
                         <form class="profile-form">
                             <div class="form-group">
-                                <label>Ad</label>
+                                <label>
+                                    <input type="text" />
+                                    Ad
+                            </label>
                                 <input type="text" value="Egemen">
                             </div>
                             <div class="form-group">
-                                <label>Soyad</label>
+                                <label>
+                                    <input type="text" />
+                                    Soyad
+                                </label>
                                 <input type="text" value="Korkmaz">
                             </div>
                             <div class="form-group">
-                                <label>E-posta</label>
+                                <label>
+                                    <input type="text" />
+                                    E-posta
+                                </label>
                                 <input type="email" value="egemen@.com.tr">
                             </div>
                             <div class="form-group">
-                                <label>Mevcut Şifre</label>
+                                <label>
+                                    <input type="text" />
+                                    Mevcut Şifre
+                                </label>
                                 <div class="password-input">
                                     <input type="password" placeholder="Mevcut şifrenizi girin">
                                     <button type="button" class="toggle-password">
@@ -118,7 +130,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Yeni Şifre</label>
+                                <label>
+                                    <input type="text" />
+                                    Yeni Şifre
+                                </label>
                                 <div class="password-input">
                                     <input type="password" placeholder="Yeni şifrenizi girin">
                                     <button type="button" class="toggle-password">
@@ -131,7 +146,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Yeni Şifre (Tekrar)</label>
+                                <label>
+                                    <input type="text" />
+                                    Yeni Şifre (Tekrar)
+                                </label>
                                 <div class="password-input">
                                     <input type="password" placeholder="Yeni şifrenizi tekrar girin">
                                     <button type="button" class="toggle-password">
@@ -140,7 +158,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Güvenlik Sorusu</label>
+                                <label>
+                                    <input type="text" />
+                                    Güvenlik Sorusu
+                                </label>
                                 <select class="security-question">
                                     <option value="">Güvenlik sorusu seçin</option>
                                     <option value="1">İlk evcil hayvanınızın adı neydi?</option>
@@ -150,7 +171,10 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Güvenlik Sorusu Cevabı</label>
+                                <label>
+                                    <input type="text" />
+                                    Güvenlik Sorusu Cevabı
+                                </label>
                                 <input type="text" placeholder="Güvenlik sorusunun cevabını girin">
                             </div>
                             <button type="submit" class="save-btn">Kaydet</button>
@@ -162,11 +186,17 @@
                         <h2>İletişim Bilgileri</h2>
                         <form class="profile-form">
                             <div class="form-group">
-                                <label>Telefon</label>
+                                <label>
+                                    <input type="text" />
+                                    Telefon
+                                </label>
                                 <input type="tel" value="+90 555 555 55 55">
                             </div>
                             <div class="form-group">
-                                <label>Adres</label>
+                                <label>
+                                    <input type="text" />
+                                    Adres
+                                </label>
                                 <textarea>Beştepe Mah. Nergiz Sok. No: 7-2 Via Flat İş Merkezi Kat:3 İç Kapı No: 87 Yenimahalle/ANKARA</textarea>
                             </div>
                             <button type="submit" class="save-btn">Kaydet</button>
@@ -231,11 +261,11 @@
         document.addEventListener('DOMContentLoaded', checkAuth);
 
         // Çıkış yap butonu için event listener
-        document.querySelector('a[href="loginpage.html"]').addEventListener('click', function(e) {
+        document.querySelector('a[href="index.html"]').addEventListener('click', function(e) {
             e.preventDefault();
             localStorage.removeItem('token');
             localStorage.removeItem('user');
-            window.location.href = 'loginpage.html';
+            window.location.href = 'index.html';
         });
 
         // Ayarlar menüsü için

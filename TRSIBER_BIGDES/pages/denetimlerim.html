@@ -27,7 +27,7 @@
                 <div class="settings-dropdown">
                     <a href="Anasayfa.html"><i class="fas fa-home"></i> Ana Sayfa</a>
                     <a href="profil.html"><i class="fas fa-user"></i> Profil</a>
-                    <a href="loginpage.html"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                    <a href="index.html"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
                 </div>
             </div>
         </div>
@@ -178,7 +178,7 @@
         function checkAuth() {
             const userData = JSON.parse(localStorage.getItem('user'));
             if (!userData) {
-                window.location.href = 'loginpage.html';
+                window.location.href = 'index.html';
                 return;
             }
 
@@ -190,11 +190,11 @@
         document.addEventListener('DOMContentLoaded', checkAuth);
 
         // Çıkış yap butonu için event listener
-        document.querySelector('a[href="loginpage.html"]').addEventListener('click', function(e) {
+        document.querySelector('a[href="index.html"]').addEventListener('click', function(e) {
             e.preventDefault();
             localStorage.removeItem('token');
             localStorage.removeItem('user');
-            window.location.href = 'loginpage.html';
+            window.location.href = 'index.html';
         });
 
         // Ayarlar menüsü için
