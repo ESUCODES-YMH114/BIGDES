@@ -52,7 +52,14 @@
             <!-- Denetim Listesi -->
             <div class="denetim-list">
                 <!-- Denetim Kartı Template -->
-                <div class="denetim-card" onclick="showDenetimDetails(1)">
+                <button 
+				class="denetim-card" 
+				onclick="showDenetimDetails(1)" 
+				tabindex="0" 
+				aria-label="Denetim detaylarını görüntüle" 
+				onkeydown="if(event.key === 'Enter' || event.key === ' ') showDenetimDetails(1)">
+
+
                     <div class="denetim-header">
                         <div class="denetim-title">
                             <h3>Web Uygulama Güvenlik Denetimi</h3>

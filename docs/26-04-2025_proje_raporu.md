@@ -10,6 +10,7 @@
 ## ✅ Yapılanlar (Günlük/Haftalık)
 
 - [✅] [Bcypt ile login sayfasondaki hashleme işlemi yapıldı.] (Kim yaptı: [Selameddin] [Berkay])
+- [✅] [SonarQube ile backand dosyalarının yazılım analizi yapıldı.] (Kim yaptı: [Umut])
 
 
 ---

@@ -1,0 +1,40 @@
+1)
+TRSIBER_BIGDES/backend/src/server.js
+Bu konumda kullanıcı tarafından sağlanan veriler doğrudan veri tabanında sorgulanıyor. C seviyesi bir hata olarak tespit edildi. 
+
+2)
+TRSIBER_BIGDES/backend/node_modules/@mapbox/node-pre-gyp/lib/util/nw-pre-gyp/index.html
+Bu konumda "<html>" öğesine "lang" ve/veya "xml:lang" özniteliklerini ekleyin
+"<html>" öğesinin bir dil niteliğine sahip olması gerekir Web:S5254
+
+3)
+TRSIBER_BIGDES/pages/admin_panel.html
+Bu konumda "Chart" nesne örneğini kaldırın ya da kullanın.
+Nesneler kullanılmadan hemen bırakılmak üzere oluşturulmamalıdır javascript:S1848
+
+4)
+TRSIBER_BIGDES/pages/denetimlerim.html
+Bu konumda Yerel olmayan etkileşimli öğelerden kaçının. Yerel HTML kullanmak mümkün değilse, etkileşimli bir içerik öğesine uygun bir rol ve sekme, fare, klavye ve dokunmatik girişler için destek ekleyin.
+Etkileşimli olmayan DOM öğelerinin etkileşimli bir işleyicisi olmamalıdır Web:S6848
+
+5)
+TRSIBER_BIGDES/pages/denetimlerim.html
+<div> etiketine bir 'onKeyPress|onKeyDown|onKeyUp' niteliği ekleyin.
+Fare olaylarının karşılık gelen klavye olaylarına sahip olması gerekir Web:MouseEventWithoutKeyboardEquivalentCheck
+
+6)
+TRSIBER_BIGDES/pages/denetimlerim.html
+<iframe> etiketine bir "title" niteliği ekleyin.
+"<frames>" bir "title" özniteliğine sahip olmalıdır Web:FrameWithoutTitleCheck
+
+7)
+TRSIBER_BIGDES/pages/index.html
+Etkileşimli olmayan öğelere fare veya klavye olay dinleyicileri atanmamalıdır.
+Etkileşimli olmayan öğelerin olay işleyicileri olmamalıdır Web:S6847
+
+8)
+TRSIBER_BIGDES/pages/profil.html
+<iframe> etiketine bir "title" niteliği ekleyin.
+"<frames>" bir "title" özniteliğine sahip olmalıdır Web:FrameWithoutTitleCheck
+
+9) 

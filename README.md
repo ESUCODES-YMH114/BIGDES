@@ -57,4 +57,7 @@ Bu proje, bilişim güvenliği denetçileri için geliştirilen bir **web tabanl
 [Eren Bozyer](https://www.linkedin.com/in/erenbozyer/) |
 ---
 🚀 **Bu projeyi geliştirmek için katkılarınızı bekliyoruz!**
+git add .
+git commit -m "test için küçük değişiklik"
+git push
 
