@@ -17,6 +17,8 @@
 - [Umut] → Siteyi geliştirme konusunda senden yardım istiyorum neleri geliştirebiliriz, performansı nasıl arttırabiliriz, siteyi daha efektif nasıl kullanabiliriz, güvenliği nasıl daha iyi sağlayabiliriz. Bunları araştırmanı istiyorum. | Deadline 30/04/2025
 - [Eren] → Hocam senden database için hazırlıkları yapmanı istiyorum şablonlar oluşturmaya başla. | Deadline 30/04/2025 
 
+Tuttugunuz raporları lütfen github a commit edin ve commit linkini ozalyildirim.com da paylaşın. 
+Dosya Yolu: ../docs/Analizler
 ---
 
 ## 🎯 Sonraki Plan
