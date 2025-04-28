@@ -57,17 +57,20 @@ app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         
+        // Email parametresini sanitize et
+        const sanitizedEmail = email.replace(/[^\w\s@.-]/g, '');
+        
         // Sadece email loglanabilir, şifre asla şifre değerini loglamayın!
-        console.log(`Giriş denemesi: ${email}`);
+        console.log(`Giriş denemesi: ${sanitizedEmail}`);
         
         // Şifre ile birlikte kullanıcıyı bul (normalde select:false olduğu için)
-        const user = await User.findOne({ email }).select('+password');
+        const user = await User.findOne({ email: sanitizedEmail }).select('+password');
 
         console.log(`Kullanıcı bulundu mu?: ${!!user}`);
         
         // Kullanıcı bulunamadıysa
         if (!user) {
-            console.log(`Kullanıcı bulunamadı: ${email}`);
+            console.log(`Kullanıcı bulunamadı: ${sanitizedEmail}`);
             return res.status(401).json({ error: 'Giriş başarısız' });
         }
 
@@ -80,12 +83,12 @@ app.post('/login', async (req, res) => {
         
         if (!isPasswordValid) {
             // Başarısız girişlerde özel hata mesajı yok
-            console.log(`Şifre eşleşmedi: ${email}`);
+            console.log(`Şifre eşleşmedi: ${sanitizedEmail}`);
             return res.status(401).json({ error: 'Giriş başarısız' });
         }
 
         // Başarılı giriş durumunda
-        console.log(`Başarılı giriş: ${email}`);
+        console.log(`Başarılı giriş: ${sanitizedEmail}`);
         res.json({
             success: true,
             user: {

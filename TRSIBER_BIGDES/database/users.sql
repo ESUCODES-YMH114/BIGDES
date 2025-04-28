@@ -14,6 +14,6 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Örnek kullanıcıları ekle
 INSERT INTO users (name, surname, email, username, password) VALUES
-('Eren', 'Yılmaz', 'eren@eren.com', 'erenyilmaz', '123456'),
-('Ahmet', 'Kaya', 'ahmet@ahmet.com', 'ahmetkaya', '123456'),
-('Ayşe', 'Demir', 'ayse@ayse.com', 'aysedemir', '123456'); 
+('Eren', 'Yılmaz', 'eren@eren.com', 'erenyilmaz', 'orneksifre1'),
+('Ahmet', 'Kaya', 'ahmet@ahmet.com', 'ahmetkaya', 'orneksifre2'),
+('Ayşe', 'Demir', 'ayse@ayse.com', 'aysedemir', 'orneksifre3'); 
