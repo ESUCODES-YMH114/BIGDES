@@ -185,7 +185,7 @@
         function checkAuth() {
             const userData = JSON.parse(localStorage.getItem('user'));
             if (!userData) {
-                window.location.href = 'index.html';
+                window.location.replace('./index.html');
                 return;
             }
 
@@ -199,10 +199,8 @@
         // Çıkış yap butonu için event listener
         document.querySelector('a[href="index.html"]').addEventListener('click', function(e) {
             e.preventDefault();
-            // Tüm oturum verilerini temizle
             localStorage.clear();
-            // Sayfayı yeniden yükle
-            location.reload();
+            window.location.replace('./index.html');
         });
 
         // Ayarlar menüsü için

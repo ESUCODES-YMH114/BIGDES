@@ -99,7 +99,7 @@
             // Denetçi bilgilerini yükle
             const userData = JSON.parse(localStorage.getItem('user'));
             if (!userData) {
-                window.location.href = 'index.html';
+                window.location.replace('./index.html');
                 return;
             }
 
@@ -139,10 +139,8 @@
                 link.addEventListener('click', (e) => {
                     if (link.id === 'logoutBtn') {
                         e.preventDefault();
-                        // Tüm oturum verilerini temizle
                         localStorage.clear();
-                        // Sayfayı yeniden yükle
-                        location.reload();
+                        window.location.replace('./index.html');
                     }
                 });
             });
