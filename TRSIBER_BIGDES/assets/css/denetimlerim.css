@@ -149,12 +149,156 @@ body::before {
 }
 
 .denetim-container {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: var(--border-radius);
     padding: 2rem;
-    box-shadow: 0 4px 6px var(--shadow-color);
-    border: 1px solid var(--border-color);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.denetim-list {
+    margin-top: 2rem;
+}
+
+.denetim-row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.denetim-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 300px;
+    max-width: calc(50% - 1rem);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    border: none;
+    text-align: left;
+}
+
+.denetim-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.denetim-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.denetim-title {
+    flex: 1;
+}
+
+.denetim-title h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status.completed {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status.ongoing {
+    background-color: #fff3e0;
+    color: #f57c00;
+}
+
+.denetim-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.denetim-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+}
+
+.detail-item i {
+    width: 16px;
+    color: #5c6bc0;
+}
+
+.denetim-progress {
+    margin-top: 1rem;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: #5c6bc0;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    display: block;
+    text-align: right;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.download-btn {
+    background: none;
+    border: none;
+    color: #5c6bc0;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.download-btn:hover {
+    background-color: rgba(92, 107, 192, 0.1);
+}
+
+.download-btn:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.download-btn:disabled:hover {
+    background: none;
+}
+
+@media (max-width: 768px) {
+    .denetim-card {
+        max-width: 100%;
+    }
+    
+    .denetim-row {
+        flex-direction: column;
+    }
 }
 
 /* Filtre Stilleri */
@@ -224,121 +368,6 @@ body::before {
     background-color: var(--accent-color);
     color: var(--primary-color);
     border-color: var(--accent-color);
-}
-
-/* Denetim Kartı Stilleri */
-.denetim-list {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-}
-
-.denetim-card {
-    background-color: var(--primary-color);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 2px 4px var(--shadow-color);
-}
-
-.denetim-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px var(--shadow-color);
-    border-color: var(--accent-color);
-}
-
-.denetim-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-}
-
-.denetim-title h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.2rem;
-    color: var(--text-color);
-}
-
-.status {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-}
-
-.status.completed {
-    background-color: rgba(40, 167, 69, 0.1);
-    color: #28a745;
-}
-
-.status.ongoing {
-    background-color: rgba(255, 193, 7, 0.1);
-    color: #ffc107;
-}
-
-.download-btn {
-    background: none;
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
-
-.download-btn:hover:not([disabled]) {
-    background-color: var(--hover-color);
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-}
-
-.download-btn[disabled] {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.denetim-details {
-    display: grid;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-}
-
-.detail-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    color: var(--text-color);
-}
-
-.denetim-progress {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.progress-bar {
-    flex: 1;
-    height: 6px;
-    background-color: var(--hover-color);
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.progress {
-    height: 100%;
-    background-color: var(--accent-color);
-    border-radius: 3px;
-    transition: width 0.3s ease;
-}
-
-.progress-text {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--accent-color);
 }
 
 /* Footer Stilleri */

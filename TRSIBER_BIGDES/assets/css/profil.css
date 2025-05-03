@@ -60,7 +60,8 @@ body {
     width: 100%;
     top: 0;
     z-index: 1000;
-    overflow: visible !important;
+    overflow: visible;
+    height: 120px;
 }
 
 .header-container {
@@ -73,7 +74,6 @@ body {
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    overflow: visible !important;
 }
 
 .header .logo img {
@@ -106,14 +106,13 @@ body {
     position: absolute;
     top: 100%;
     right: 0;
-    background: #fff;
+    background: white;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 8px 0;
     min-width: 200px;
-    z-index: 9999 !important;
+   z-index: 3001; 
     display: none;
-    border: 1px solid #e0e0e0;
 }
 
 .settings-dropdown.active {
