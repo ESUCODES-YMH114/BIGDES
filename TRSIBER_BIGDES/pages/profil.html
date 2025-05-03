@@ -246,7 +246,7 @@
         function checkAuth() {
             const userData = JSON.parse(localStorage.getItem('user'));
             if (!userData) {
-                window.location.replace('./index.html');
+                window.location.replace('../index.html');
                 return;
             }
 
@@ -264,7 +264,7 @@
         document.querySelector('a[href="index.html"]').addEventListener('click', function(e) {
             e.preventDefault();
             localStorage.clear();
-            window.location.replace('./index.html');
+            window.location.replace('../index.html');
         });
 
         // Ayarlar menüsü için
