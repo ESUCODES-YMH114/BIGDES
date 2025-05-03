@@ -139,8 +139,11 @@
             logoutBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
+                // Tüm oturum verilerini temizle
                 localStorage.clear();
-                window.location.replace('../index.html');
+                sessionStorage.clear();
+                // Doğrudan giriş sayfasına git
+                window.location.href = window.location.origin;
             });
 
             // Dosya yükleme işlemleri için
