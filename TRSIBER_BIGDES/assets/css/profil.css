@@ -60,7 +60,8 @@ body {
     width: 100%;
     top: 0;
     z-index: 1000;
-    overflow: hidden;
+    overflow: visible;
+    height: 120px;
 }
 
 .header-container {
@@ -110,7 +111,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 8px 0;
     min-width: 200px;
-    z-index: 3001;
+   z-index: 3001; 
     display: none;
 }
 
