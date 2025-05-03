@@ -51,82 +51,81 @@
 
             <!-- Denetim Listesi -->
             <div class="denetim-list">
-                <!-- Denetim Kartı Template -->
-                <button 
-				class="denetim-card" 
-				onclick="showDenetimDetails(1)" 
-				tabindex="0" 
-				aria-label="Denetim detaylarını görüntüle" 
-				onkeydown="if(event.key === 'Enter' || event.key === ' ') showDenetimDetails(1)">
-
-
-                    <div class="denetim-header">
-                        <div class="denetim-title">
-                            <h3>Web Uygulama Güvenlik Denetimi</h3>
-                            <span class="status completed">Tamamlandı</span>
+                <div class="denetim-row">
+                    <!-- Web Uygulama Güvenlik Denetimi Kartı -->
+                    <div class="denetim-card">
+                        <div class="denetim-header">
+                            <div class="denetim-title">
+                                <h3>Web Uygulama Güvenlik Denetimi</h3>
+                                <span class="status completed">Tamamlandı</span>
+                            </div>
+                            <div class="denetim-actions">
+                                <button class="download-btn" title="Denetimi İndir">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="denetim-actions">
-                            <button class="download-btn" title="Denetimi İndir">
-                                <i class="fas fa-download"></i>
-                            </button>
+                        <div class="denetim-content">
+                            <div class="denetim-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Başlangıç: 01.03.2024</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <span>Bitiş: 15.03.2024</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-building"></i>
+                                    <span>Kurum: ABC Şirketi</span>
+                                </div>
+                            </div>
+                            <div class="denetim-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 100%"></div>
+                                </div>
+                                <span class="progress-text">100%</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="denetim-details">
-                        <div class="detail-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>Başlangıç: 01.03.2024</span>
+
+                    <!-- Mobil Uygulama Güvenlik Denetimi Kartı -->
+                    <div class="denetim-card">
+                        <div class="denetim-header">
+                            <div class="denetim-title">
+                                <h3>Mobil Uygulama Güvenlik Denetimi</h3>
+                                <span class="status ongoing">Devam Ediyor</span>
+                            </div>
+                            <div class="denetim-actions">
+                                <button class="download-btn" title="Denetimi İndir" disabled>
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="detail-item">
-                            <i class="fas fa-calendar-check"></i>
-                            <span>Bitiş: 15.03.2024</span>
+                        <div class="denetim-content">
+                            <div class="denetim-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Başlangıç: 10.03.2024</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <span>Tahmini Bitiş: 25.03.2024</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-building"></i>
+                                    <span>Kurum: XYZ Şirketi</span>
+                                </div>
+                            </div>
+                            <div class="denetim-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 60%"></div>
+                                </div>
+                                <span class="progress-text">60%</span>
+                            </div>
                         </div>
-                        <div class="detail-item">
-                            <i class="fas fa-building"></i>
-                            <span>Kurum: ABC Şirketi</span>
-                        </div>
-                    </div>
-                    <div class="denetim-progress">
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 100%"></div>
-                        </div>
-                        <span class="progress-text">100%</span>
                     </div>
                 </div>
-
-                <!-- Devam Eden Denetim Örneği -->
-                <button class="denetim-card" onclick="showDenetimDetails(2)" type="button">
-                    <div class="denetim-header">
-                        <div class="denetim-title">
-                            <h3>Mobil Uygulama Güvenlik Denetimi</h3>
-                            <span class="status ongoing">Devam Ediyor</span>
-                        </div>
-                        <div class="denetim-actions">
-                            <button class="download-btn" title="Denetimi İndir" disabled>
-                                <i class="fas fa-download"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="denetim-details">
-                        <div class="detail-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>Başlangıç: 10.03.2024</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-calendar-check"></i>
-                            <span>Tahmini Bitiş: 25.03.2024</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-building"></i>
-                            <span>Kurum: XYZ Şirketi</span>
-                        </div>
-                    </div>
-                    <div class="denetim-progress">
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 60%"></div>
-                        </div>
-                        <span class="progress-text">60%</span>
-                    </div>
-                </button>
             </div>
         </div>
     </main>
@@ -185,7 +184,7 @@
         function checkAuth() {
             const userData = JSON.parse(localStorage.getItem('user'));
             if (!userData) {
-                window.location.href = 'index.html';
+                window.location.replace('../index.html');
                 return;
             }
 
@@ -199,9 +198,11 @@
         // Çıkış yap butonu için event listener
         document.querySelector('a[href="index.html"]').addEventListener('click', function(e) {
             e.preventDefault();
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            window.location.href = 'index.html';
+            // Tüm oturum verilerini temizle
+            localStorage.clear();
+            sessionStorage.clear();
+            // Doğrudan giriş sayfasına git
+            window.location.href = window.location.origin;
         });
 
         // Ayarlar menüsü için
