@@ -99,7 +99,7 @@
             // Denetçi bilgilerini yükle
             const userData = JSON.parse(localStorage.getItem('user'));
             if (!userData) {
-                window.location.href = 'loginpage.html';
+                window.location.replace('../index.html');
                 return;
             }
 
@@ -134,15 +134,13 @@
                 }
             }
 
-            // Menü öğelerine tıklama
-            settingsDropdown.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    if (link.id === 'logoutBtn') {
-                        e.preventDefault();
-                        localStorage.removeItem('user');
-                        window.location.href = 'index.html';
-                    }
-                });
+            // Çıkış yap butonu için event listener
+            const logoutBtn = document.getElementById('logoutBtn');
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                localStorage.clear();
+                window.location.replace('../index.html');
             });
 
             // Dosya yükleme işlemleri için
