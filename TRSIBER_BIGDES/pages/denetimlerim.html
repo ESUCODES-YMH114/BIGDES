@@ -54,7 +54,7 @@
                 <div class="denetim-row">
                     <!-- Web Uygulama Güvenlik Denetimi Kartı -->
                     <div class="denetim-card">
-                        <div class="denetim-header">
+                        
                             <div class="denetim-title">
                                 <h3>Web Uygulama Güvenlik Denetimi</h3>
                                 <span class="status completed">Tamamlandı</span>
@@ -65,7 +65,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="denetim-content">
+                        
                             <div class="denetim-details">
                                 <div class="detail-item">
                                     <i class="fas fa-calendar-alt"></i>
@@ -87,10 +87,10 @@
                                 <span class="progress-text">100%</span>
                             </div>
                         </div>
-                    </div>
+                   
 
                     <!-- Mobil Uygulama Güvenlik Denetimi Kartı -->
-                    <div class="denetim-card">
+                    
                         <div class="denetim-header">
                             <div class="denetim-title">
                                 <h3>Mobil Uygulama Güvenlik Denetimi</h3>
@@ -102,7 +102,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="denetim-content">
+                       
                             <div class="denetim-details">
                                 <div class="detail-item">
                                     <i class="fas fa-calendar-alt"></i>
@@ -123,9 +123,6 @@
                                 </div>
                                 <span class="progress-text">60%</span>
                             </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </main>
@@ -201,11 +198,7 @@
             // Tüm oturum verilerini temizle
             localStorage.clear();
             sessionStorage.clear();
-            // Doğrudan giriş sayfasına git
-            window.location.href = window.location.origin;
-        });
 
-        // Ayarlar menüsü için
         document.querySelector('.settings-btn').addEventListener('click', function() {
             document.querySelector('.settings-dropdown').classList.toggle('active');
         });
