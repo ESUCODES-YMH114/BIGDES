@@ -162,26 +162,7 @@
 
             // Sektör dağılımı grafiği
             const sektorCtx = document.getElementById('sektorChart').getContext('2d');
-            new Chart(sektorCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Finans', 'Teknoloji', 'Sağlık', 'Eğitim', 'Diğer'],
-                    datasets: [{
-                        data: [30, 25, 15, 10, 20],
-                        backgroundColor: [
-                            '#4CAF50',
-                            '#2196F3',
-                            '#FFC107',
-                            '#9C27B0',
-                            '#607D8B'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
+            
         };
 
         // Sidebar aktif menü
