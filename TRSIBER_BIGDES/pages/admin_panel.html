@@ -159,27 +159,6 @@
         window.onload = function() {
             // Denetim istatistikleri grafiği
             const denetimCtx = document.getElementById('denetimChart').getContext('2d');
-            new Chart(denetimCtx, {
-                type: 'line',
-                data: {
-                    labels: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran'],
-                    datasets: [{
-                        label: 'Tamamlanan Denetimler',
-                        data: [45, 59, 80, 81, 56, 55],
-                        borderColor: '#4CAF50',
-                        tension: 0.1
-                    }, {
-                        label: 'Devam Eden Denetimler',
-                        data: [28, 48, 40, 19, 86, 27],
-                        borderColor: '#2196F3',
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
 
             // Sektör dağılımı grafiği
             const sektorCtx = document.getElementById('sektorChart').getContext('2d');
