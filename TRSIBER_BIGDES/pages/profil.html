@@ -91,7 +91,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Profile Info Section -->
                     <div class="content-section" id="profile-info">
                         <h2>Profil Bilgileri</h2>
@@ -103,7 +102,6 @@
                                     Ad
                                 </label>
                             </div>
-
                             <div class="form-group">
                                 <label>
                                     <input type="text" />
@@ -112,14 +110,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label>
+                                
                                     <input type="text" />
                                     E-posta
                                 </label>
                             </div>
 
                             <div class="form-group">
-                                <label>
+                      
                                     Mevcut Şifre
                                 </label>
                                 <div class="password-input">
@@ -259,13 +257,6 @@
         // Çıkış yap butonu için event listener
         document.querySelector('a[href="index.html"]').addEventListener('click', function(e) {
             e.preventDefault();
-            // Tüm oturum verilerini temizle
-            localStorage.clear();
-            sessionStorage.clear();
-            // Doğrudan giriş sayfasına git
-            window.location.href = window.location.origin;
-        });
-
         // Ayarlar menüsü için
         document.querySelector('.settings-btn').addEventListener('click', function() {
             document.querySelector('.settings-dropdown').classList.toggle('active');
