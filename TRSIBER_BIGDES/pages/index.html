@@ -73,7 +73,11 @@
                 } else {
                     alert('Giriş başarısız');
                 }
-            } 
+            }catch (error) {
+				console.error(error);
+				//try koyulmuş catch koyulmamış giriş yapılamıyordu fixledim eren bne
+			} 
+			
         });
     </script>
 </body>
