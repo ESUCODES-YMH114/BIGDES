@@ -291,7 +291,10 @@
                     throw new Error('Denetim detayları alınamadı');
                 }
                 return await response.json();
-            } 
+            }catch (error) {
+				console.error(error);
+				//try koyulmuş catch koyulmamış giriş yapılamıyordu fixledim eren bne
+			}  
         }
 
         // Detay HTML'ini oluştur
