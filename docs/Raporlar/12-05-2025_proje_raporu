@@ -1,0 +1,35 @@
+# 📌 Proje Adı: BIGDES
+
+## 📅 Tarih: 2025-05-12
+
+## Arkadaşlar sitede olan sorunları gördükçe bilgilendirme için hem Özal Hocanın sitesini hem grubumuzu kullanın.
+
+---
+
+## 🚨 SonarCloud Analiz Raporu
+
+### Bulunan ÖNEMLİ Hatalar
+| Tür | Dosya/Yol | Satır | Açıklama | Önem Derecesi |
+|:---|:----------|:------|:---------|:--------------|
+| Security | backend/src/server.js | 67 | SQL Injection riski var. | Blocker |
+
+---
+
+## 📋 Görev Dağılımı
+
+- [Selameddin] → Denetimlerim sayfası fixlenecek. | Deadline 14/05/2025
+- [Berkay] → server.js dosyasındaki güvenlik açığını düzeltmek. | Deadline 13/05/2025
+- [Umut] → Herhangi bir logo ya da görsel ile sayfalarda bulunan logo kısımlarını doldurup headerda bulunan logo ile anasayfa yönlendirmesi yapılacak. | Deadline 14/05/2025
+- [Eren] → Profilim sayfasında bulunan butonlar düzenlenecek. | Deadline 14/05/2025
+- [Berkay] → Profil, denetimlerim sayfalarında bulunan dropdown menüler çalışmıyor onlar fixlenecek | Deadline 14/05/2025 
+- [Eren] → Admin tablosu oluşturulacak ve admin userlara özel admin page erişimi sağlanacak. Admin userlarda dropdown menüde admin paneli gözükecek. | Deadline 15/05/2025
+- [Berkay] → Headerlara modern görünümlü minimal birer koyu tema butonu eklenecek. | Deadline 15/05/2025
+
+---
+
+## 🎯 Sonraki Plan
+
+- Minor ve Medium tüm kod hatalarının giderilmesi.
+- Kod review yapılması.
+- Database işlenecek.
+- Anasayfada bulunan yükleme sistemi için konu başlıklarına göre tablolar oluşturulup birleştirilecek.
