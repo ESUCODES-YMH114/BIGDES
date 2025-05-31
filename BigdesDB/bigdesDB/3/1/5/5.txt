@@ -1,0 +1,117 @@
+-- 1. ÖNCE KONUYU EKLEYELİM (Eğer daha önce eklenmediyse)
+INSERT INTO konular (grup_id, konu_kodu, konu_adi)
+SELECT grup_id, '3.1.5', 'Zararlı Yazılımlardan Korunma'
+FROM varlik_gruplari WHERE grup_kodu = '3.1';
+
+-- 2. TEDBİRLERİ EKLEYELİM (3.1.5.1'den 3.1.5.8'e kadar)
+-- 3.1.5.1
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.5.1', 1, 
+       'Zararlı Yazılımdan Korunma Uygulamalarının Kullanılması ve Merkezi Olarak Yönetilmesi',
+       'İstemci ve sunucu sistemlerinin tamamında zararlı yazılımdan korunma uygulamaları kullanılmalı ve zararlı yazılımdan korunma uygulamalarında en güncel yama dosyalarının bulunması ve imza veri tabanının güncel olması sağlanmalıdır. Zararlı yazılımdan korunma uygulamalarına ait politikalar merkezi olarak yönetilmelidir.',
+       'Mülakat;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.5';
+
+-- 3.1.5.2
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.5.2', 1,
+       'Taşınabilir Disklerin Zararlı Yazılım Taramalarından Geçirilmesi',
+       'Kurumdaki tüm bilgisayarlar, taşınabilir diskleri otomatik olarak zararlı yazılım taramasından geçirecek şekilde yapılandırılmalıdır.',
+       'Mülakat;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.5';
+
+-- 3.1.5.3
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.5.3', 1,
+       'Cihazların Otomatik Kod Çalıştırmasına İzin Vermemesi',
+       'Kurumdaki tüm bilgisayarlar, taşınabilir ortamlarda otomatik kod çalıştırılmasına izin vermeyecek şekilde yapılandırılmalıdır.',
+       'Mülakat;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.5';
+
+-- 3.1.5.4
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.5.4', 1,
+       'Zararlı Yazılımdan Korunma Uygulamalarının Yapılandırılması ve Güncel Tutulması',
+       'Zararlı yazılımlardan korunma uygulaması üretici veya ilgili kurum tarafından önerilen şekilde yapılandırılmalı ve güncel tutulmalıdır.',
+       'Mülakat;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.5';
+
+-- 3.1.5.5 (Referans verilen tedbir)
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.5.5', 1,
+       'İşletim Sistemlerinin Güvenlik Mekanizmalarının Etkinleştirilmesi',
+       'Bk. Tedbir No: 5.1.1.12',
+       'Mülakat;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.5';
+
+-- 3.1.5.6
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.5.6', 2,
+       'Zararlı Yazılımdan Korunma Uygulamalarına Ait Kayıtların Merkezi Olarak Tutulması',
+       'Tüm zararlı yazılım tespitleri, merkezi yönetim ve kayıt sunucularına iletilmelidir.',
+       'Mülakat;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.5';
+
+-- 3.1.5.7
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.5.7', 3,
+       'DNS Sorgularının Kayıtlarının Tutulması',
+       'Zararlı IP adreslerine erişimin denetlenmesi için DNS sorguları kayıt altına alınmalıdır.',
+       'Gözden Geçirme'
+FROM konular WHERE konu_kodu = '3.1.5';
+
+-- 3.1.5.8
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.5.8', 3,
+       'Komut Satırı Kayıtlarının Tutulması',
+       'Kurumda, kullanıcı tarafından PowerShell ve Bash gibi komut satırı kullanılarak yapılan işlemler denetlenmeli ve merkezi olarak kayıt altına alınmalıdır.',
+       'Gözden Geçirme'
+FROM konular WHERE konu_kodu = '3.1.5';
+
+-- 3. DENETİM SORULARINI EKLEYELİM
+-- 3.1.5.1 için sorular
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurum bünyesinde hangi zararlı yazılımdan korunma uygulamaları kullanılmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.5.1';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Zararlı yazılımdan korunma uygulamalarına ait politikalar merkezi olarak yönetilmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.5.1';
+
+-- 3.1.5.2 için soru
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurumdaki tüm bilgisayarlar taşınabilir diskleri otomatik olarak zararlı yazılım taramasından geçirecek şekilde yapılandırılmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.5.2';
+
+-- 3.1.5.3 için soru
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurumdaki tüm bilgisayarlar taşınabilir ortamlarda otomatik kod çalıştırılmasına izin vermeyecek şekilde yapılandırılmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.5.3';
+
+-- 3.1.5.4 için sorular
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurumda kullanılan zararlı yazılımdan korunma uygulamaları, üreticisi veya ilgili kurum tarafından önerilen şekilde yapılandırılmış mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.5.4';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Yazılımın imza veri tabanı düzenli aralıklarla güncellenmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.5.4';
+
+-- 3.1.5.6 için soru
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurumda tespit edilen zararlı yazılım bilgileri merkezi yönetim ve kayıt sunucularına iletilmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.5.6';
+
+-- 3.1.5.7 için soru
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurumda DNS sorguları kayıt edilmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.5.7';
+
+-- 3.1.5.8 için sorular
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurumda, PowerShell ve Bash gibi komut satırından yapılan şüpheli işlemler denetlenmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.5.8';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Bu işlemler merkezi olarak kayıt altına alınmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.5.8';
