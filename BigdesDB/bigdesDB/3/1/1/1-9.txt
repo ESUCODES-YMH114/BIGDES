@@ -1,0 +1,194 @@
+
+INSERT IGNORE INTO varlik_gruplari (grup_kodu, grup_adi) 
+VALUES ('3.1', 'Ağ ve Sistem Güvenliği');
+
+INSERT INTO konular (grup_id, konu_kodu, konu_adi)
+SELECT grup_id, '3.1.1', 'Donanım Varlıklarının Envanter Yönetimi'
+FROM varlik_gruplari WHERE grup_kodu = '3.1';
+
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.1.1', 1, 'Donanım Envanterinin Yönetimi', 
+       'Veri saklama, işleme ve iletme yeteneği olan tüm donanımların güncel bir envanteri tutulmalı, yalnızca yetkilendirilmiş personelin varlık envanterine erişimi mümkün kılınmalıdır.', 
+       'Mülakat;Gözden Geçirme'
+FROM konular WHERE konu_kodu = '3.1.1';
+
+
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.1.2', 1, 'Donanım Envanter İçeriğinin Yönetimi',
+       'Donanım envanteri en az; her bir donanımın ağ adresini, donanım adresini, makine adını, seri numarasını, markasını, modelini, destek alınan tedarikçi sözleşme bilgilerini (bakım süresi, kapsamı vb.), donanımın sorumlusunu, sorumlu kişinin birimini ve donanımın kurum tarafından onaylı olup olmadığı bilgisini içermelidir. Donanım envanter içeriğinde yapılan değişiklikler kayıt altına alınmalıdır.',
+       'Mülakat;Gözden Geçirme'
+FROM konular WHERE konu_kodu = '3.1.1';
+
+
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.1.3', 1, 'Donanım Envanterine Kaydedilmemiş Donanımların Yönetimi',
+       'Yeni tedarik edilen ya da ağa yeni bağlanacak donanımların, donanım varlık envanterine kaydı yapılmadan kurum ağına bağlanmamasına yönelik politika ve prosedürler oluşturulmalı ve uygulanmalıdır.',
+       'Mülakat;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.1';
+
+
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.1.4', 2, 'Aktif Keşif Araçlarının Kullanılması',
+       'Kurum ağına bağlı cihazları tanımlamak ve donanım varlık envanterindeki değişiklikleri takip etmek için aktif keşif araçları kullanılmalıdır.',
+       'Mülakat;Gözden Geçirme;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.1';
+
+
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.1.5', 2, 'DHCP Kayıt Mekanizması ile Yeni Donanımların Tespiti',
+       'Kurumun donanım envanterini güncel tutmak için tüm DHCP sunucularında ya da IP adres yönetim araçlarında kayıt mekanizmasının kullanımı sağlanmalıdır.',
+       'Mülakat;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.1';
+
+
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.1.6', 2, 'Kullanım Ömrünü Tamamlayan Cihazların Veri Depolama Üniteleri',
+       'Kullanım ömrünü tamamlayan cihazların veri depolama üniteleri (HDD, SSD, USB, disk, harici bellek vb.) güvenli bir şekilde imha edilmelidir. Kurum içinde tekrar kullanılması durumunda ise veri kurtarmaya imkân sağlamayacak şekilde güvenli silme işlemine tabi tutulduktan sonra kullanıma alınmalıdır.',
+       'Mülakat;Gözden Geçirme'
+FROM konular WHERE konu_kodu = '3.1.1';
+
+
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.1.7', 2, 'Kurum Ağı Bağlantı Noktalarında Kimlik Denetimi Yapılması',
+       'Sadece onaylı donanımların kurum ağına bağlanabilmesi için, 802.1x standardı veya NAC çözümleri kullanılarak kurum ağına bağlanan cihazlara kimlik denetimi yapılmalıdır.',
+       'Mülakat;Sızma Testi'
+FROM konular WHERE konu_kodu = '3.1.1';
+
+
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.1.8', 3, 'Donanım Varlıklarının Kimlik Denetimi için İstemci Sertifikalarının Kullanılması',
+       'Destekleyen cihazlarda, kurumun güvenli ağlarına bağlanan donanım varlıklarının kimlik denetimi için istemci sertifikaları kullanılmalıdır. Sertifika, yetkilendirilmiş personel tarafından güvenli alanda oluşturulmalıdır. Sertifikanın anahtar uzunluğu, tipi (NES/NES olmayan) ve oluşturulma yöntemi bilgi güvenliği gereksinimleri doğrultusunda seçilmelidir. Oluşturulan sertifika güvenli alanda saklanmalı ve sertifika yaşam döngüsünün takibi yapılmalıdır.',
+       'Mülakat;Gözden Geçirme;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.1';
+
+
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.1.9', 3, 'Sabit Disk Güvenliği',
+       'Kurum tarafından satın alınan kullanıcı bilgisayarlarına ait sabit diskler, veri kurtarmaya imkân sağlamayacak şekilde güvenli silme işlemine tabi tutulduktan sonra sistemlere dâhil edilmelidir.',
+       'Mülakat;Gözden Geçirme'
+FROM konular WHERE konu_kodu = '3.1.1';
+
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurum bünyesinde detaylı ve güncel bir donanım envanteri tutulmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.1';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Envanter yönetim süreci tanımlanmış mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.1';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Donanım envanterine hangi personelin erişim yetkisi bulunmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.1';
+
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Donanım envanterinde; her bir donanım için ağ adresi, donanım adresi, makine adı, seri numarası, marka, model, donanımın sorumlusu ve donanımın kurum tarafından onaylı olup olmadığı bilgisi tutulmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.2';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Donanım envanterinde yer alan varlıklara ait hangi bilgiler detaylandırılmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.2';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Donanım envanter içeriğinde yapılan değişiklikler kayıt altına alınmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.2';
+
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Donanım varlık envanterine kaydedilmemiş olan donanımlar kurum ağına nasıl bağlanmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.3';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Donanım envanterinde yer almayan donanımların yönetimi ile ilgili politika/prosedür bulunmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.3';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'İlgili politika/prosedürler uygulanmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.3';
+
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurumda, ağa bağlanılan cihazları tanımak ve donanım envanterindeki değişiklikleri takip etmek amacıyla aktif keşif araçları kullanılmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.4';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Aktif keşif araçları ile keşif işlemi en son ne zaman yapılmıştır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.4';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Keşif sonuçları nasıl analiz edilmektedir?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.4';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Keşif sonuçları nasıl saklanmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.4';
+
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kuruma ait DHCP sunucularında kayıt tutulmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.5';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Tespit edilen yeni donanımlar, donanım envanterine kontrollü olarak eklenmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.5';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Varsa IP adres yönetimi aracında ilgili kayıt tutulmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.5';
+
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kullanım ömrünü tamamlayan cihazların imha edilmesine veya tekrar kullanılmasına yönelik bir politika/prosedür tanımlanmış mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.6';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'İlgili politika/prosedür uygulanmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.6';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Cihazların veri depolama ünitelerini güvenli silmek amacıyla hangi yöntemler kullanılmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.6';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kullanım ömrünü tamamlayan cihazların veri depolama ünitelerini imha etmek için hangi yöntemler kullanılmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.6';
+
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Port seviyesinde erişim kontrolü yapılmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.7';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurum ağına bağlanan cihazlar için 802.1x veya NAC çözümleri kullanılarak kimlik denetimi yapılmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.7';
+
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kuruma ait güvenli ağlara bağlanan hangi donanımlar için istemci sertifikası ile kimlik doğrulaması yapılmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.8';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Sertifika, yetkilendirilmiş personel tarafından güvenli bir alanda oluşturulmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.8';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Sertifikanın anahtar uzunluğu, tipi (NES/NES olmayan) ve oluşturulma yöntemi seçilirken bilgi güvenliği gereksinimleri dikkate alınmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.8';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Oluşturulan sertifika güvenli alanda saklanmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.8';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Sertifika yaşam döngüsünün takibi yapılmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.8';
+
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurum tarafından temin edilen ve kullanıcı bilgisayarlarında kullanılması planlanan sabit diskleri sisteme dâhil etmek amacıyla bir süreç tanımlanmış ve uygulanmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.9';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Temin edilen sabit diskler, sisteme dâhil edilmeden önce hangi güvenli silme işlemlerine tabi tutulmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.1.9';
