@@ -111,18 +111,14 @@
                             </div>
 
                             <div class="form-group">
-<<<<<<< HEAD
-                                
-=======
                                 <label>
 									E-posta
->>>>>>> f78de32a4c19c1dc799de37f019498d966e9d0d9
                                     <input type="text" />
                                 </label>
                             </div>
 
                             <div class="form-group">
-                      
+                                <label>
                                     Mevcut Şifre
                                 </label>
                                 <div class="password-input">
@@ -224,178 +220,30 @@
     <script src="../assets/js/particles/particles_header.js"></script>
     <script src="../assets/js/particles/particles_footer.js"></script>
     <script>
-        // Oturum kontrolü ve profil bilgilerini yükleme
-        function checkAuth() {
-            const userData = JSON.parse(localStorage.getItem('user'));
-            if (!userData) {
-                
-                return;
-            }
-
-            // Profil bilgilerini göster
-            document.getElementById('denetciIsmi').textContent = `${userData.name} ${userData.surname}`;
-            document.querySelector('input[type="text"][value=""]').value = userData.name;
-            document.querySelector('input[type="text"][value=""]').value = userData.surname;
-            document.querySelector('input[type="email"]').value = userData.email;
-        }
-
-        // Sayfa yüklendiğinde oturum kontrolü yap
-        document.addEventListener('DOMContentLoaded', checkAuth);
-
-        // Çıkış yap butonu için event listener
-        document.querySelector('a[href="index.html"]').addEventListener('click', function(e) {
-            e.preventDefault();
-<<<<<<< HEAD
-			}
-=======
-
-
-
-
-            
-        });
-
->>>>>>> f78de32a4c19c1dc799de37f019498d966e9d0d9
-        // Ayarlar menüsü için
-        document.querySelector('.settings-btn').addEventListener('click', function() {
-            document.querySelector('.settings-dropdown').classList.toggle('active');
-        });
-
-        // Şifre göster/gizle fonksiyonu
-        function togglePassword(input, button) {
-            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-            input.setAttribute('type', type);
-            button.querySelector('i').classList.toggle('fa-eye');
-            button.querySelector('i').classList.toggle('fa-eye-slash');
-        }
-
-        // Şifre gücü kontrolü
-        function checkPasswordStrength(password) {
-            let strength = 0;
-            if (password.length >= 8) strength++;
-            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
-            if (password.match(/\d/)) strength++;
-            if (password.match(/[^a-zA-Z\d]/)) strength++;
-
-            const strengthBar = document.querySelector('.strength-bar');
-            const strengthText = document.querySelector('.strength-text');
-            
-            if (strengthBar && strengthText) {
-                if (strength <= 1) {
-                    strengthBar.setAttribute('data-strength', 'weak');
-                    strengthText.textContent = 'Şifre gücü: Zayıf';
-                } else if (strength <= 2) {
-                    strengthBar.setAttribute('data-strength', 'medium');
-                    strengthText.textContent = 'Şifre gücü: Orta';
-                } else {
-                    strengthBar.setAttribute('data-strength', 'strong');
-                    strengthText.textContent = 'Şifre gücü: Güçlü';
-                }
-            }
-        }
-
-        // Sayfa yüklendiğinde
         document.addEventListener('DOMContentLoaded', function() {
-            // Şifre göster/gizle butonları
-            document.querySelectorAll('.toggle-password').forEach(button => {
-                button.addEventListener('click', function() {
-                    const input = this.parentElement.querySelector('input');
-                    togglePassword(input, this);
-                });
-            });
-
-            // Şifre gücü kontrolü
-            const newPasswordInput = document.querySelector('input[placeholder="Yeni şifrenizi girin"]');
-            if (newPasswordInput) {
-                newPasswordInput.addEventListener('input', function() {
-                    checkPasswordStrength(this.value);
-                });
-            }
-
-            // Form gönderimi
-            const profileForm = document.querySelector('.profile-form');
-            if (profileForm) {
-                profileForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-
-                    const newPassword = document.querySelector('input[placeholder="Yeni şifrenizi girin"]');
-                    const confirmPassword = document.querySelector('input[placeholder="Yeni şifrenizi tekrar girin"]');
-                    const securityQuestion = document.querySelector('.security-question');
-                    const securityAnswer = document.querySelector('input[placeholder="Güvenlik sorusunun cevabını girin"]');
-
-                    // Şifre kontrolü
-                    if (newPassword && confirmPassword && newPassword.value !== confirmPassword.value) {
-                        alert('Yeni şifreler eşleşmiyor!');
-                        return;
-                    }
-
-                    if (newPassword && newPassword.value.length < 8) {
-                        alert('Yeni şifre en az 8 karakter olmalıdır!');
-                        return;
-                    }
-
-                    // Güvenlik sorusu kontrolü
-                    if (securityQuestion && !securityQuestion.value) {
-                        alert('Lütfen bir güvenlik sorusu seçin!');
-                        return;
-                    }
-
-                    if (securityAnswer && !securityAnswer.value) {
-                        alert('Lütfen güvenlik sorusunun cevabını girin!');
-                        return;
-                    }
-
-                    // Başarılı mesajı
-                    alert('Profil bilgileriniz başarıyla güncellendi!');
-                });
-            }
-
-            // Profil menü işlemleri
-            const menuItems = document.querySelectorAll('.menu-item');
-            const contentSections = document.querySelectorAll('.content-section');
-
-            menuItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    // Aktif menü öğesini güncelle
-                    menuItems.forEach(i => i.classList.remove('active'));
-                    item.classList.add('active');
-
-                    // İlgili içerik bölümünü göster
-                    const sectionId = item.getAttribute('data-section');
-                    contentSections.forEach(section => {
-                        section.classList.remove('active');
-                        if (section.id === sectionId) {
-                            section.classList.add('active');
-                        }
-                    });
-                });
-            });
-
-            // Profil fotoğrafı değiştirme
-            const changePhotoBtn = document.querySelector('.change-photo-btn');
-            const profileImage = document.querySelector('.profile-image');
-
-            if (changePhotoBtn && profileImage) {
-                changePhotoBtn.addEventListener('click', () => {
-                    const input = document.createElement('input');
-                    input.type = 'file';
-                    input.accept = 'image/*';
-                    input.onchange = (e) => {
-                        const file = e.target.files[0];
-                        if (file) {
-                            const reader = new FileReader();
-                            reader.onload = (e) => {
-                                profileImage.src = e.target.result;
-                            };
-                            reader.readAsDataURL(file);
-                        }
-                    };
-                    input.click();
-                });
-            }
-
+            // Kullanıcı adını göster
             const userData = JSON.parse(localStorage.getItem('user'));
+            const denetciIsmi = document.getElementById('denetciIsmi');
+            if (userData && denetciIsmi) {
+                denetciIsmi.textContent = `${userData.name} ${userData.surname}`;
+            }
+
+            // Dropdown menü aç/kapat
+            const settingsBtn = document.getElementById('settingsBtn');
+            const settingsDropdown = document.getElementById('settingsDropdown');
+            if (settingsBtn && settingsDropdown) {
+                settingsBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    settingsDropdown.classList.toggle('active');
+                });
+                document.addEventListener('click', function(e) {
+                    if (!settingsDropdown.contains(e.target) && !settingsBtn.contains(e.target)) {
+                        settingsDropdown.classList.remove('active');
+                    }
+                });
+            }
+
+            // Admin panel linkini sadece adminlere göster
             const adminPanelLink = document.getElementById('adminPanelLink');
             if (adminPanelLink && userData && userData.role === 'admin') {
                 adminPanelLink.style.display = 'block';

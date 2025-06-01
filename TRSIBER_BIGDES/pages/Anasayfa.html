@@ -24,8 +24,8 @@
                     <span class="denetci-isim" id="denetciIsmi">Yükleniyor...</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
-                <div class="settings-dropdown" id="settingsDropdown"> <!--MENUDE BULUNAN SEÇENEKLER-->
-                    <a href="profil.html"><i class="fas fa-user"></i> Profil</a>
+                <div class="settings-dropdown" id="settingsDropdown">
+                    <a href="Anasayfa.html"><i class="fas fa-home"></i> Ana Sayfa</a>
                     <a href="denetimlerim.html"><i class="fas fa-list"></i> Denetimlerim</a>
                     <a href="index.html" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
                     <a href="admin_panel.html" id="adminPanelLink" style="display: none;"><i class="fas fa-cog"></i> Admin Paneli</a>
@@ -207,7 +207,29 @@
             }
 
             document.addEventListener('DOMContentLoaded', function() {
+                // Kullanıcı adını göster
                 const userData = JSON.parse(localStorage.getItem('user'));
+                const denetciIsmi = document.getElementById('denetciIsmi');
+                if (userData && denetciIsmi) {
+                    denetciIsmi.textContent = `${userData.name} ${userData.surname}`;
+                }
+
+                // Dropdown menü aç/kapat
+                const settingsBtn = document.getElementById('settingsBtn');
+                const settingsDropdown = document.getElementById('settingsDropdown');
+                if (settingsBtn && settingsDropdown) {
+                    settingsBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        settingsDropdown.classList.toggle('active');
+                    });
+                    document.addEventListener('click', function(e) {
+                        if (!settingsDropdown.contains(e.target) && !settingsBtn.contains(e.target)) {
+                            settingsDropdown.classList.remove('active');
+                        }
+                    });
+                }
+
+                // Admin panel linkini sadece adminlere göster
                 const adminPanelLink = document.getElementById('adminPanelLink');
                 if (adminPanelLink && userData && userData.role === 'admin') {
                     adminPanelLink.style.display = 'block';
