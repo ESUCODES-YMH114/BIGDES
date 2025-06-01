@@ -56,17 +56,18 @@ app.get('/denetimlerim.html', (req, res) => {
 // Kullanıcı girişi
 app.post('/login', async (req, res) => {
     try {
-        const { email, password, recaptcha } = req.body;
-        // reCAPTCHA doğrulaması
-        if (!recaptcha) {
-            return res.status(400).json({ error: 'reCAPTCHA doğrulaması başarısız' });
-        }
-        const secretKey = '6LfJdFIrAAAAAEAmDNcVyPoMwCizZRG2O0NzyWRS';
-        const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptcha}`;
-        const recaptchaRes = await axios.post(verificationURL);
-        if (!recaptchaRes.data.success) {
-            return res.status(400).json({ error: 'reCAPTCHA doğrulaması başarısız' });
-        }
+        const { email, password } = req.body;
+        // reCAPTCHA doğrulaması geçici olarak devre dışı
+        // const { recaptcha } = req.body;
+        // if (!recaptcha) {
+        //     return res.status(400).json({ error: 'reCAPTCHA doğrulaması başarısız' });
+        // }
+        // const secretKey = '6LfJdFIrAAAAAEAmDNcVyPoMwCizZRG2O0NzyWRS';
+        // const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptcha}`;
+        // const recaptchaRes = await axios.post(verificationURL);
+        // if (!recaptchaRes.data.success) {
+        //     return res.status(400).json({ error: 'reCAPTCHA doğrulaması başarısız' });
+        // }
         
         // Email parametresini sanitize et
         const sanitizedEmail = email.replace(/[^\w\s@.-]/g, '');
