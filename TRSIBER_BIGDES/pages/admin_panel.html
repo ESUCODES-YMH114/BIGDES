@@ -23,9 +23,6 @@
                     <a href="#denetciler"><i class="fas fa-users"></i> Denetçiler</a>
                 </li>
                 <li>
-                    <a href="#kurumlar"><i class="fas fa-building"></i> Kurumlar</a>
-                </li>
-                <li>
                     <a href="#denetimler"><i class="fas fa-tasks"></i> Denetimler</a>
                 </li>
                 <li>
@@ -62,6 +59,110 @@
                 </div>
             </div>
         </header>
+
+        <!-- Yeni Denetçi Modal -->
+        <div id="yeniKullaniciModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Yeni Denetçi Ekle</h2>
+                <form id="yeniKullaniciForm">
+                    <div class="form-group">
+                        <label for="ad">Ad:</label>
+                        <input type="text" id="ad" name="ad" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="soyad">Soyad:</label>
+                        <input type="text" id="soyad" name="soyad" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-posta:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sifre">Şifre:</label>
+                        <input type="password" id="sifre" name="sifre" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Denetçi Ekle</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Denetçiler Sekmesi -->
+        <div id="denetciler" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Denetçiler</h2>
+                <button class="btn-primary" id="yeniDenetciBtn">
+                    <i class="fas fa-user-plus"></i> Yeni Denetçi
+                </button>
+            </div>
+            <div class="denetciler-grid">
+                <!-- Örnek denetçi kartları -->
+                <div class="denetci-card">
+                    <div class="denetci-info">
+                        <img src="../assets/images/admin-avatar.png" alt="Denetçi" class="denetci-avatar">
+                        <div class="denetci-details">
+                            <h3>Ahmet Yılmaz</h3>
+                            <p>Denetçi ID: DNT001</p>
+                            <p>ahmet.yilmaz@example.com</p>
+                        </div>
+                    </div>
+                    <div class="denetci-stats">
+                        <div class="stat">
+                            <span class="stat-label">Toplam Denetim</span>
+                            <span class="stat-value">24</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Aktif Denetim</span>
+                            <span class="stat-value">3</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Diğer denetçi kartları buraya eklenecek -->
+            </div>
+        </div>
+
+        <!-- Raporlar Sekmesi -->
+        <div id="raporlar" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Raporlar</h2>
+            </div>
+            <div class="raporlar-grid">
+                <!-- Örnek rapor kartı -->
+                <div class="rapor-card">
+                    <div class="rapor-header">
+                        <h3>Web Uygulama Güvenlik Denetimi</h3>
+                        <span class="rapor-tarih">15.03.2024</span>
+                    </div>
+                    <div class="rapor-detay">
+                        <div class="detay-item">
+                            <span class="detay-label">Denetlenen Kurum:</span>
+                            <span class="detay-value">ABC Teknoloji A.Ş.</span>
+                        </div>
+                        <div class="detay-item">
+                            <span class="detay-label">Kurum ID:</span>
+                            <span class="detay-value">KRM001</span>
+                        </div>
+                        <div class="detay-item">
+                            <span class="detay-label">Denetçi:</span>
+                            <span class="detay-value">Ahmet Yılmaz</span>
+                        </div>
+                        <div class="detay-item">
+                            <span class="detay-label">Denetçi ID:</span>
+                            <span class="detay-value">DNT001</span>
+                        </div>
+                    </div>
+                    <div class="rapor-actions">
+                        <button class="btn-secondary">
+                            <i class="fas fa-download"></i> İndir
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fas fa-eye"></i> Görüntüle
+                        </button>
+                    </div>
+                </div>
+                <!-- Diğer rapor kartları buraya eklenecek -->
+            </div>
+        </div>
 
         <!-- Dashboard -->
         <div class="dashboard-content">
@@ -163,16 +264,82 @@
             // Sektör dağılımı grafiği
             const sektorCtx = document.getElementById('sektorChart').getContext('2d');
             
-        };
+            // Modal işlevselliği
+            const modal = document.getElementById('yeniKullaniciModal');
+            const btn = document.getElementById('yeniDenetciBtn');
+            const span = document.getElementsByClassName('close')[0];
+            const form = document.getElementById('yeniKullaniciForm');
 
-        // Sidebar aktif menü
-        document.querySelectorAll('.sidebar-nav a').forEach(link => {
-            link.addEventListener('click', function(e) {
+            // Modal'ı aç
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
+
+            // Modal'ı kapat
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // Modal dışına tıklandığında kapat
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            // Form gönderimi
+            form.onsubmit = function(e) {
                 e.preventDefault();
-                document.querySelector('.sidebar-nav li.active').classList.remove('active');
-                this.parentElement.classList.add('active');
+                
+                const formData = {
+                    ad: document.getElementById('ad').value,
+                    soyad: document.getElementById('soyad').value,
+                    email: document.getElementById('email').value,
+                    sifre: document.getElementById('sifre').value
+                };
+
+                // Burada API'ye kullanıcı kayıt isteği gönderilecek
+                console.log('Yeni denetçi:', formData);
+                
+                // Formu temizle ve modalı kapat
+                form.reset();
+                modal.style.display = "none";
+                
+                // Başarılı mesajı göster
+                alert('Denetçi başarıyla eklendi!');
+            };
+
+            // Sekme değiştirme işlevselliği
+            const sections = {
+                dashboard: document.querySelector('.dashboard-content'),
+                denetciler: document.getElementById('denetciler'),
+                denetimler: document.getElementById('denetimler'),
+                raporlar: document.getElementById('raporlar'),
+                loglar: document.getElementById('loglar'),
+                ayarlar: document.getElementById('ayarlar')
+            };
+
+            document.querySelectorAll('.sidebar-nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Aktif menü öğesini güncelle
+                    document.querySelector('.sidebar-nav li.active').classList.remove('active');
+                    this.parentElement.classList.add('active');
+                    
+                    // Tüm bölümleri gizle
+                    Object.values(sections).forEach(section => {
+                        if (section) section.style.display = 'none';
+                    });
+                    
+                    // Seçilen bölümü göster
+                    const targetId = this.getAttribute('href').substring(1);
+                    if (sections[targetId]) {
+                        sections[targetId].style.display = 'block';
+                    }
+                });
             });
-        });
+        };
     </script>
 </body>
 </html> 
