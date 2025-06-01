@@ -28,6 +28,7 @@
                     <a href="Anasayfa.html"><i class="fas fa-home"></i> Ana Sayfa</a>
                     <a href="profil.html"><i class="fas fa-user"></i> Profil</a>
                     <a href="index.html"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                    <a href="admin_panel.html" id="adminPanelLink" style="display: none;"><i class="fas fa-cog"></i> Admin Paneli</a>
                 </div>
             </div>
         </div>
@@ -190,6 +191,11 @@
 
             // Kullanıcı adını göster
             document.getElementById('denetciIsmi').textContent = `${userData.name} ${userData.surname}`;
+
+            const adminPanelLink = document.getElementById('adminPanelLink');
+            if (userData && userData.role === 'admin') {
+                adminPanelLink.style.display = 'block';
+            }
         }
 
         // Sayfa yüklendiğinde oturum kontrolü yap
@@ -517,6 +523,13 @@
                 modal.style.display = 'none';
             }
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const userData = JSON.parse(localStorage.getItem('user'));
+            if (!userData || userData.role !== 'admin') {
+                window.location.replace('Anasayfa.html');
+            }
+        });
     </script>
 </body>
 </html> 

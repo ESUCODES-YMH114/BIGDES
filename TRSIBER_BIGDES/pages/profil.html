@@ -27,6 +27,7 @@
                     <a href="Anasayfa.html"><i class="fas fa-home"></i> Ana Sayfa</a>
                     <a href="denetimlerim.html"><i class="fas fa-list"></i> Denetimlerim</a>
                     <a href="index.html"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                    <a href="admin_panel.html" id="adminPanelLink" style="display: none;"><i class="fas fa-cog"></i> Admin Paneli</a>
                 </div>
             </div>
         </div>
@@ -386,6 +387,12 @@
                     };
                     input.click();
                 });
+            }
+
+            const userData = JSON.parse(localStorage.getItem('user'));
+            const adminPanelLink = document.getElementById('adminPanelLink');
+            if (userData && userData.role === 'admin') {
+                adminPanelLink.style.display = 'block';
             }
         });
     </script>
