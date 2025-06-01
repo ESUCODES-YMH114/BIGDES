@@ -32,7 +32,7 @@
                     <a href="#loglar"><i class="fas fa-history"></i> Log Kayıtları</a>
                 </li>
                 <li>
-                    <a href="#ayarlar"><i class="fas fa-cog"></i> Ayarlar</a>
+                    <a href="Anasayfa.html" id="cikisBtn"><i class="fas fa-sign-out-alt"></i> Panelden Çık</a>
                 </li>
             </ul>
         </nav>
@@ -315,12 +315,18 @@
                 denetciler: document.getElementById('denetciler'),
                 denetimler: document.getElementById('denetimler'),
                 raporlar: document.getElementById('raporlar'),
-                loglar: document.getElementById('loglar'),
-                ayarlar: document.getElementById('ayarlar')
+                loglar: document.getElementById('loglar')
             };
 
             document.querySelectorAll('.sidebar-nav a').forEach(link => {
                 link.addEventListener('click', function(e) {
+                    // Çıkış butonu için özel işlem
+                    if (this.id === 'cikisBtn') {
+                        // LocalStorage'dan kullanıcı bilgilerini temizle
+                        localStorage.removeItem('user');
+                        return; // Normal yönlendirmeye devam et
+                    }
+
                     e.preventDefault();
                     
                     // Aktif menü öğesini güncelle

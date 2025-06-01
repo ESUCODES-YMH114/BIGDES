@@ -446,6 +446,36 @@ body {
     color: var(--text-color);
 }
 
+/* Yeni Denetçi Butonu */
+#yeniDenetciBtn {
+    background: linear-gradient(135deg, var(--primary-color), #1976D2);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.2);
+}
+
+#yeniDenetciBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+#yeniDenetciBtn i {
+    font-size: 0.9rem;
+}
+
+#yeniDenetciBtn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+}
+
 /* Denetçiler Grid */
 .denetciler-grid {
     display: grid;
