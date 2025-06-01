@@ -1,0 +1,201 @@
+-- 1. ÖNCE KONUYU EKLEYELİM (EĞER DAHA ÖNCE EKLENMEDİYSE)
+INSERT IGNORE INTO konular (grup_id, konu_kodu, konu_adi)
+SELECT grup_id, '3.1.3', 'Tehdit ve Zafiyet Yönetimi'
+FROM varlik_gruplari WHERE grup_kodu = '3.1';
+
+-- 2. TEDBİRLERİ TEK TEK EKLEYELİM (3.1.3.1'den 3.1.3.10'a kadar)
+-- 3.1.3.1
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.3.1', 1, 'Yazılım Güncelleme Araçlarının Kullanımı',
+       'Tüm sistemlerdeki yazılımların, mevcut iş gereksinimlerini karşılayacak ve yazılım üreticisi tarafından sağlanan en kararlı ve güncel güvenlik sürümleri ile çalıştırılmakta olduğu otomatik yazılım güncelleme araçları kullanılarak kontrol edilmelidir. Otomatik yazılım güncelleme araçlarının kullanılamadığı durumlarda uzman personel tarafından manuel olarak gerekli kontroller periyodik olarak yapılmalıdır.',
+       'Mülakat;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.3';
+
+-- 3.1.3.1'in SORULARINI EKLEYELİM
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurumda kullanılan yazılımların güvenlik güncellemeleri zamanında yapılmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.1';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Bu güncellemelerin devreye alınıp alınmadığı, yazılım güncelleme araçları vasıtasıyla otomatik olarak kontrol edilmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.1';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Yazılım güncelleme araçlarının kullanılmadığı durumlarda güncellemelere yönelik kontroller nasıl yapılmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.1';
+
+-- 3.1.3.2
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.3.2', 1, 'Zararlı Yazılımların Engellenmesi',
+       'Zararlı yazılımların kuruma ait ve/veya kurum tarafından yönetilen kullanıcı uç nokta cihazları ve altyapı bileşenleri üzerinde çalışmasını, kaydedilmesini ve aktarılmasını engellemek için politikalar/prosedürler tanımlanmalı ve işletilmelidir. Personelin beyaz listede bulunan uygulamalar haricinde uygulama kurmasının engellenmesine yönelik politika/prosedür oluşturulmalıdır. Politika/prosedürün uygulanmasını temin etmek üzere gerekli teknolojik altyapılar ve uyarı mekanizmaları aktif edilmelidir.',
+       'Mülakat;Gözden Geçirme;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.3';
+
+-- 3.1.3.2'nin SORULARINI EKLEYELİM
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Zararlı yazılımların engellenmesi ve beyaz liste denetim yöntemi için nasıl bir süreç işletilmektedir?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.2';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Beyaz liste nasıl oluşturulmuştur?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.2';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kullanıcıların yazılım yükleme yetkisi var mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.2';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurum bilgi sistemleri altyapısında zararlı yazılımları engellemek için hangi mekanizma/yöntemler kullanılmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.2';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurum bilgi sistemleri altyapı bileşenlerinde hangi sıkılaştırma önlemleri devreye alınmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.2';
+
+-- 3.1.3.3
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.3.3', 1, 'Zafiyet/Yama Yönetimi',
+       'Kurumsal uygulamaların, kurum ağının ve sistem bileşenlerinin güvenlik açıklarının zamanında tespit edilmesi için uygulanacak politikalar ve süreçler tanımlanmalıdır. Zafiyet ve yama yönetimine ilişkin değişiklikler, tanımlanmış değişiklik yönetimi süreci üzerinden kontrollü olarak gerçekleştirilmelidir.',
+       'Mülakat;Gözden Geçirme'
+FROM konular WHERE konu_kodu = '3.1.3';
+
+-- 3.1.3.3'ün SORULARINI EKLEYELİM
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Zafiyet ve yama yönetimine ilişkin politikalar/süreçler tanımlanmış mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.3';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'İlgili politika/süreçler işletilmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.3';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Zafiyet ve yama yönetimine ilişkin değişiklikler nasıl ele alınmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.3';
+
+-- 3.1.3.4
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.3.4', 1, 'Yüksek ve Üzeri Seviyede Zafiyet İçeren Sunucu/Uygulamaların Yalıtılması',
+       'Yüksek ve üzeri seviyede zafiyet barındıran sunucu ve uygulamalar, diğer sistemlerden fiziksel ya da mantıksal olarak izole edilmelidir. İzolasyon yapılamadığı durumlarda söz konusu sunucu ve uygulamalarda katmanlı güvenlik prensibine uygun şekilde güvenliğin artırılması sağlanmalıdır.',
+       'Mülakat;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.3';
+
+-- 3.1.3.4'ün SORULARINI EKLEYELİM
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Yüksek ve üzeri seviyede zafiyet içeren sunucu ve uygulamalar diğer sistemlerden fiziksel ve/veya mantıksal olarak izole edilmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.4';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Yüksek ve üzeri seviyede zafiyet içeren sunucu ve uygulamaların diğer sistemlerden fiziksel ve/veya mantıksal olarak izole edilememesi durumunda hangi önlemler alınmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.4';
+
+-- 3.1.3.5
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.3.5', 1, 'Son Kullanıcıların Yetkisiz Program Ekleme/Kaldırma İşlemlerinin Engellenmesi',
+       'Son kullanıcıların, güvenlik sıkılaştırmaları kapsamında kurum tarafından uygulanması gerekli görülen konfigürasyonlara müdahale etmemesi ve beyaz listede bulunan programlar haricinde program kurmalarının engellenmesi için son kullanıcı hesaplarının yerel yönetici yetkileri kaldırılmalıdır. Bk. Tedbir No: 5.1.3.4',
+       'Mülakat;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.3';
+
+-- 3.1.3.5'in SORULARINI EKLEYELİM
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Program ekleme, kaldırma ve konfigürasyon işlemleri nasıl yapılmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.5';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Yerel yönetici hakkına sahip olan hesaplar nasıl yönetilmektedir?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.5';
+
+-- 3.1.3.6
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.3.6', 1, 'Güvenlik Açıkları için Risk Analizi Tabanlı Önceliklendirme',
+       'Tespit edilen güvenlik açıklarının giderilmesi için hazırlanan aksiyon planına yönelik önceliklendirme risk analizi tabanlı yapılmalıdır.',
+       'Mülakat;Gözden Geçirme'
+FROM konular WHERE konu_kodu = '3.1.3';
+
+-- 3.1.3.6'nın SORULARINI EKLEYELİM
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Tespit edilen güvenlik açıklarının giderilmesi ile ilgili aksiyon planlamaları kapsamında önceliklendirme nasıl yapılmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.6';
+
+-- 3.1.3.7
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.3.7', 1, 'Güvenlik Sıkılaştırmalarının Yapılması',
+       'Kurumsal uygulamalar (web, DNS, e-posta, FTP vb. ile diğer uygulamalar) ve kurum ağındaki bileşenler, işletim sisteminin ve paket yazılımların kurulumuyla gelen varsayılan güvenlik ayarlarıyla kullanılmamalıdır. Kullanıma alınmadan önce bilgi güvenliği gereksinimleri dikkate alınarak gerekli güvenlik sıkılaştırmaları yapılmalıdır. Bk. Bölüm 5',
+       'Mülakat;Güvenlik Denetimi;Sızma Testi'
+FROM konular WHERE konu_kodu = '3.1.3';
+
+-- 3.1.3.7'nin SORULARINI EKLEYELİM
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Güvenli olarak kabul edilmeyen ve/veya varsayılan konfigürasyon ile çalışan kurumsal uygulama var mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.7';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurumsal uygulamaları ve kurum ağındaki diğer bileşenleri devreye alma sürecinde nasıl bir sıkılaştırma süreci izlenmektedir?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.7';
+
+-- 3.1.3.8
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.3.8', 2, 'İşletim Sistemi Yama Yönetimi Araçlarının Kullanımı',
+       'Güvenlik güncellemeleri başta olmak üzere işletim sistemlerine yönelik güncellemelerin ve yamaların üreticisi tarafından bildirilen en kararlı, güncel ve güvenilir sürüm dikkate alınarak yapıldığı, otomatik yazılım güncelleme araçları ile kontrol edilmelidir.',
+       'Mülakat;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.3';
+
+-- 3.1.3.8'in SORULARINI EKLEYELİM
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurumda kullanılan işletim sistemlerinin kritik güvenlik güncellemeleri/yamaları zamanında yapılmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.8';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Bu güncellemeler/yamalar yazılım güncelleme araçları vasıtasıyla otomatik olarak takip edilmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.8';
+
+-- 3.1.3.9
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.3.9', 2, 'Zafiyet Tarama Araçlarının Kullanımı',
+       'Kurum ağında yer alan tüm sistemler (test sistemleri de dâhil olmak üzere) güvenlik içeriği otomasyon protokolü (SCAP) uyumlu güvenlik zafiyeti tarama aracı kullanılarak periyodik olarak taranmalıdır. Güvenlik taramaları için oluşturulan hesaplar farklı bir amaç için kullanılmamalı, en az yetki ve bilmesi gereken prensibi doğrultusunda yetkilendirme yapılarak ilgili erişim kayıtları tutulmalıdır. Güvenlik taramaları için oluşturulan hesaplar düzenli olarak kontrol edilmeli ve izlenmelidir. Zafiyet tarama araçları, güvenlik açıklarına yönelik yapılan doğrulama faaliyetleri öncesi ve sonrası durumu içerecek şekilde raporlama yapmalıdır. Üretilen raporların güvenliği sağlanmalı ve raporlara sadece yetkili personel erişim sağlamalıdır.',
+       'Mülakat;Güvenlik Denetimi'
+FROM konular WHERE konu_kodu = '3.1.3';
+
+-- 3.1.3.9'un SORULARINI EKLEYELİM
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurumdaki sistemler düzenli olarak zafiyet taramalarından geçirilmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.9';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Güvenlik taramaları için oluşturulan hesaplar taramalar dışında başka faaliyetler için kullanılmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.9';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Bu hesapların yetkileri sadece belirli IP adreslerinden gerekli makinelere bağlanabilecek şekilde kısıtlanmış mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.9';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Bu hesaplar düzenli olarak kontrol edilmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.9';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Geçmişte tespit edilen zafiyetlerin giderilip giderilmediği sonraki taramalarda kontrol edilmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.9';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Zafiyet tarama raporları nasıl muhafaza edilmektedir?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.9';
+
+-- 3.1.3.10
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.3.10', 2, 'Aktif Portların, Servislerin ve Protokollerin Varlık Envanterinde Tutulması',
+       'Aktif bağlantı portları, servisler ve protokoller donanım ve yazılım varlık envanterinde yer alan varlıklar ile eşleştirilmelidir. Kurum sistemlerinin tümünü kapsayacak şekilde port, servis ve protokol taramaları gerçekleştirilmeli, açık ve kullanımına ihtiyaç olmayan portların tespit edilmesi durumunda alarm üreten mekanizmalar devreye alınmalıdır.',
+       'Mülakat;Güvenlik Denetimi;Sızma Testi'
+FROM konular WHERE konu_kodu = '3.1.3';
+
+-- 3.1.3.10'un SORULARINI EKLEYELİM
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Aktif bağlantı portları, servisleri ve protokolleri varlık envanterindeki donanım ve yazılım varlıklarıyla eşleştirilmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.10';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kuruma ait sistemlerde kullanımına ihtiyaç olmayan ve onaylanmamış servislerin, port ve protokollerin çalışıp çalışmadığı kontrol edilmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.10';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kullanımına ihtiyaç olmayan portların tespiti için düzenli tarama yapılmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.3.10';

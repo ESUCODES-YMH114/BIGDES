@@ -24,10 +24,11 @@
                     <span class="denetci-isim" id="denetciIsmi">Yükleniyor...</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
-                <div class="settings-dropdown">
+                <div class="settings-dropdown" id="settingsDropdown">
                     <a href="Anasayfa.html"><i class="fas fa-home"></i> Ana Sayfa</a>
                     <a href="profil.html"><i class="fas fa-user"></i> Profil</a>
-                    <a href="index.html"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                    <a href="index.html" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                    <a href="admin_panel.html" id="adminPanelLink" style="display: none;"><i class="fas fa-cog"></i> Admin Paneli</a>
                 </div>
             </div>
         </div>
@@ -51,10 +52,17 @@
 
             <!-- Denetim Listesi -->
             <div class="denetim-list">
+<<<<<<< HEAD
                 <div class="denetim-row">
                     <!-- Web Uygulama Güvenlik Denetimi Kartı -->
                     <div class="denetim-card">
                         
+=======
+
+
+                
+                        <div class="denetim-header">
+>>>>>>> f78de32a4c19c1dc799de37f019498d966e9d0d9
                             <div class="denetim-title">
                                 <h3>Web Uygulama Güvenlik Denetimi</h3>
                                 <span class="status completed">Tamamlandı</span>
@@ -89,8 +97,13 @@
                         </div>
                    
 
+<<<<<<< HEAD
                     <!-- Mobil Uygulama Güvenlik Denetimi Kartı -->
                     
+=======
+                   
+            
+>>>>>>> f78de32a4c19c1dc799de37f019498d966e9d0d9
                         <div class="denetim-header">
                             <div class="denetim-title">
                                 <h3>Mobil Uygulama Güvenlik Denetimi</h3>
@@ -123,6 +136,12 @@
                                 </div>
                                 <span class="progress-text">60%</span>
                             </div>
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> f78de32a4c19c1dc799de37f019498d966e9d0d9
             </div>
         </div>
     </main>
@@ -181,12 +200,17 @@
         function checkAuth() {
             const userData = JSON.parse(localStorage.getItem('user'));
             if (!userData) {
-                window.location.replace('../index.html');
+                
                 return;
             }
 
             // Kullanıcı adını göster
             document.getElementById('denetciIsmi').textContent = `${userData.name} ${userData.surname}`;
+
+            const adminPanelLink = document.getElementById('adminPanelLink');
+            if (userData && userData.role === 'admin') {
+                adminPanelLink.style.display = 'block';
+            }
         }
 
         // Sayfa yüklendiğinde oturum kontrolü yap
@@ -195,9 +219,18 @@
         // Çıkış yap butonu için event listener
         document.querySelector('a[href="index.html"]').addEventListener('click', function(e) {
             e.preventDefault();
+<<<<<<< HEAD
             // Tüm oturum verilerini temizle
             localStorage.clear();
             sessionStorage.clear();
+=======
+
+
+
+
+            
+        });
+>>>>>>> f78de32a4c19c1dc799de37f019498d966e9d0d9
 
         document.querySelector('.settings-btn').addEventListener('click', function() {
             document.querySelector('.settings-dropdown').classList.toggle('active');
@@ -511,6 +544,14 @@
                 modal.style.display = 'none';
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('user'));
+            const adminPanelLink = document.getElementById('adminPanelLink');
+            if (adminPanelLink && userData && userData.role === 'admin') {
+                adminPanelLink.style.display = 'block';
+            }
+        });
     </script>
 </body>
 </html> 

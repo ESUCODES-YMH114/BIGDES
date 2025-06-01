@@ -23,10 +23,11 @@
                     <span class="denetci-isim" id="denetciIsmi">Yükleniyor...</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
-                <div class="settings-dropdown">
+                <div class="settings-dropdown" id="settingsDropdown">
                     <a href="Anasayfa.html"><i class="fas fa-home"></i> Ana Sayfa</a>
                     <a href="denetimlerim.html"><i class="fas fa-list"></i> Denetimlerim</a>
-                    <a href="index.html"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                    <a href="index.html" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                    <a href="admin_panel.html" id="adminPanelLink" style="display: none;"><i class="fas fa-cog"></i> Admin Paneli</a>
                 </div>
             </div>
         </div>
@@ -72,21 +73,21 @@
                                 <i class="fas fa-file-alt"></i>
                                 <div class="stat-info">
                                     <h3>Toplam Denetim</h3>
-                                    <p>12</p>
+                                    <p>BURA DATABASEDEN ÇEKİLECEK</p>
                                 </div>
                             </div>
                             <div class="stat-card">
                                 <i class="fas fa-check-circle"></i>
                                 <div class="stat-info">
                                     <h3>Tamamlanan</h3>
-                                    <p>8</p>
+                                    <p>BURA DATABASEDEN ÇEKİLECEK</p>
                                 </div>
                             </div>
                             <div class="stat-card">
                                 <i class="fas fa-clock"></i>
                                 <div class="stat-info">
                                     <h3>Devam Eden</h3>
-                                    <p>4</p>
+                                    <p>BURA DATABASEDEN ÇEKİLECEK</p>
                                 </div>
                             </div>
                         </div>
@@ -98,21 +99,25 @@
 
                             <div class="form-group">
                                 <label>
-                                    <input type="text" />
-                                    Ad
+									Ad
+                                    <input type="text" />                                    
                                 </label>
                             </div>
                             <div class="form-group">
                                 <label>
-                                    <input type="text" />
-                                    Soyad
+									Soyad
+                                    <input type="text" />                                    
                                 </label>
                             </div>
 
                             <div class="form-group">
+<<<<<<< HEAD
                                 
+=======
+                                <label>
+									E-posta
+>>>>>>> f78de32a4c19c1dc799de37f019498d966e9d0d9
                                     <input type="text" />
-                                    E-posta
                                 </label>
                             </div>
 
@@ -153,24 +158,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>
-                                    Güvenlik Sorusu
-                                </label>
-                                <select class="security-question">
-                                    <option value="">Güvenlik sorusu seçin</option>
-                                    <option value="1">İlk evcil hayvanınızın adı neydi?</option>
-                                    <option value="2">İlk okulunuzun adı neydi?</option>
-                                    <option value="3">En sevdiğiniz öğretmeninizin adı neydi?</option>
-                                    <option value="4">Doğduğunuz şehrin posta kodu nedir?</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>
-                                    Güvenlik Sorusu Cevabı
-                                </label>
-                                <input type="text" placeholder="Güvenlik sorusunun cevabını girin">
-                            </div>
+                           
                             <button type="submit" class="save-btn">Kaydet</button>
                         </form>
                     </div>
@@ -240,14 +228,14 @@
         function checkAuth() {
             const userData = JSON.parse(localStorage.getItem('user'));
             if (!userData) {
-                window.location.replace('../index.html');
+                
                 return;
             }
 
             // Profil bilgilerini göster
             document.getElementById('denetciIsmi').textContent = `${userData.name} ${userData.surname}`;
-            document.querySelector('input[type="text"][value="Egemen"]').value = userData.name;
-            document.querySelector('input[type="text"][value="Korkmaz"]').value = userData.surname;
+            document.querySelector('input[type="text"][value=""]').value = userData.name;
+            document.querySelector('input[type="text"][value=""]').value = userData.surname;
             document.querySelector('input[type="email"]').value = userData.email;
         }
 
@@ -257,7 +245,17 @@
         // Çıkış yap butonu için event listener
         document.querySelector('a[href="index.html"]').addEventListener('click', function(e) {
             e.preventDefault();
+<<<<<<< HEAD
 			}
+=======
+
+
+
+
+            
+        });
+
+>>>>>>> f78de32a4c19c1dc799de37f019498d966e9d0d9
         // Ayarlar menüsü için
         document.querySelector('.settings-btn').addEventListener('click', function() {
             document.querySelector('.settings-dropdown').classList.toggle('active');
@@ -395,6 +393,12 @@
                     };
                     input.click();
                 });
+            }
+
+            const userData = JSON.parse(localStorage.getItem('user'));
+            const adminPanelLink = document.getElementById('adminPanelLink');
+            if (adminPanelLink && userData && userData.role === 'admin') {
+                adminPanelLink.style.display = 'block';
             }
         });
     </script>

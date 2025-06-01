@@ -173,6 +173,13 @@
                 this.parentElement.classList.add('active');
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('user'));
+            if (!userData || userData.role !== 'admin') {
+                window.location.replace('Anasayfa.html');
+            }
+        });
     </script>
 </body>
 </html> 
