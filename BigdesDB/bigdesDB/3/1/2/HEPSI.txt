@@ -1,0 +1,122 @@
+-- 1. Add the konu (if not already exists)
+INSERT INTO konular (grup_id, konu_kodu, konu_adi)
+SELECT grup_id, '3.1.2', 'Yazılım Varlıklarının Envanter Yönetimi'
+FROM varlik_gruplari WHERE grup_kodu = '3.1';
+
+-- 2. Add all tedbirler for 3.1.2
+-- 3.1.2.1
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.2.1', 1, 'Yazılım Envanterinin Yönetimi',
+       'Kurumda kullanılan tüm yazılımların (işletim sistemleri, donanım yazılımları, üçüncü parti yazılımlar, uygulama yazılımları vb.) güncel bir listesi tutulmalı ve listeye yalnızca yetkilendirilmiş personelin erişimi mümkün kılınmalıdır.',
+       'Mülakat;Gözden Geçirme'
+FROM konular WHERE konu_kodu = '3.1.2';
+
+-- 3.1.2.2
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.2.2', 1, 'Yazılım Envanter İçeriğinin Yönetimi',
+       'Yazılım envanter yönetim araçlarında, kurum tarafından yetkilendirilen işletim sistemleri dâhil olmak üzere en az; yazılımların adı, sürümü, yayımcısı, destek alınan tedarikçi sözleşme bilgileri (bakım süresi, kapsamı vb.), lisans bilgileri ve edinim tarihi bilgileri, yazılımın yüklendiği donanımlar kayıt altına alınmalı ve izlenebilir olmalıdır. Yazılım envanter içeriğinde yapılan değişiklikler kayıt altına alınmalıdır.',
+       'Mülakat;Gözden Geçirme'
+FROM konular WHERE konu_kodu = '3.1.2';
+
+-- 3.1.2.3
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.2.3', 1, 'Yazılımın Üreticisi Tarafından Desteklenmesi',
+       'Kurumun onaylı yazılım envanterine yalnızca üreticisi tarafından desteklenen yazılımlar dâhil edilmelidir. Yazılım envanterinde kayıtlı olan yazılımlar için güncelleme desteği devamlılığı sağlanmalıdır. Üreticisi tarafından sunulan destek hizmeti sona ermiş ancak iş gereksinimleri sebebi ile kullanılması gereken yazılımlar, yazılım envanterinde "üretici tarafından desteklenmeyen" olarak etiketlenmelidir.',
+       'Mülakat;Gözden Geçirme'
+FROM konular WHERE konu_kodu = '3.1.2';
+
+-- 3.1.2.4
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.2.4', 1, 'Yazılım Envanterine Kaydedilmemiş Yazılımların Yönetimi',
+       'Kurum tarafından onaylanmayan yazılımların kullanılmasına yönelik politika ve prosedürler oluşturulmalı ve uygulanmalıdır.',
+       'Mülakat;Gözden Geçirme'
+FROM konular WHERE konu_kodu = '3.1.2';
+
+-- 3.1.2.5
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.2.5', 2, 'Yazılım Envanteri Yönetim Araçlarının Kullanımı',
+       'Kurum sistemlerindeki tüm yazılımlar için envanter yönetim araçları kullanılmalıdır. Söz konusu envanter yönetim araçları, yazılımların mevcut durumları ile ilgili raporlama yeteneğine sahip olmalıdır.',
+       'Mülakat;Gözden Geçirme'
+FROM konular WHERE konu_kodu = '3.1.2';
+
+-- 3.1.2.6
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.2.6', 3, 'Yazılım ve Donanım Envanterinin Entegre Edilmesi',
+       'Yazılım ve donanım envanteri birbirleri ile entegre edilmelidir. Entegre edilen envanter merkezi olarak yönetilmelidir.',
+       'Mülakat;Gözden Geçirme'
+FROM konular WHERE konu_kodu = '3.1.2';
+
+-- 3.1.2.7
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT konu_id, '3.1.2.7', 3, 'Beyaz Liste Yönetimi',
+       'Kurum uygulama beyaz liste yönetimi yazılımı kullanmalıdır. Uygulama tarafından en az aşağıda yer alan kısıtlamalar devreye alınmalıdır. Yalnızca onaylı yazılım kütüphanelerinin (* .dll, * .ocx, * .so vb.) yüklenmesi Yalnızca onaylı ve dijital olarak imzalanmış betik dosyalarının (* .ps1, * .py, makrolar vb.) çalıştırılması.',
+       'Mülakat;Güvenlik Denetimi;Sızma Testi'
+FROM konular WHERE konu_kodu = '3.1.2';
+
+-- 3. Add all denetim soruları for each tedbir
+-- 3.1.2.1 Questions
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurum bünyesinde detaylı ve güncel bir yazılım envanteri tutulmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.1';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Envanter yönetim süreci tanımlanmış mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.1';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Yazılım envanterine hangi personelin erişim yetkisi bulunmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.1';
+
+-- 3.1.2.2 Questions
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Yazılım envanterinde yazılımlara ait isim, versiyon, lisans bilgileri ve edinim tarihi gibi bilgiler tutulmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.2';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Yazılım envanterinde, yazılımların yüklü olduğu donanım veya sanallaştırma ortamının kaydı tutulmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.2';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Yazılım envanter içeriğinde yapılan değişiklikler kayıt altına alınmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.2';
+
+-- 3.1.2.3 Questions
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurumda kullanılan yazılımların üretici tarafından desteklendiği takip edilmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.3';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Desteklenmeyen yazılımlar envanterde yer almakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.3';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Desteklenmeyen yazılımlar envanterde nasıl etiketlenmektedir?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.3';
+
+-- 3.1.2.4 Question
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurum tarafından onaylanmayan yazılımların kullanımı ile ilgili süreç ve sistem bulunmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.4';
+
+-- 3.1.2.5 Questions
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kurumda kullanılan yazılımların envanterini otomatik olarak oluşturmak için hangi yazılım envanter araçları kullanılmaktadır?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.5';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Kullanılan yazılım envanteri yönetim aracı hangi özelliklere sahiptir?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.5';
+
+-- 3.1.2.6 Question
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Yazılım envanter sistemi ve donanım envanter sistemi entegre midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.6';
+
+-- 3.1.2.7 Questions
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Uygulama beyaz liste yönetimi için yazılım kullanılmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.7';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Beyaz liste yazılımı, *.dll, *.ocx gibi sadece onaylı kütüphanelerin yüklenmesine ya da *.ps1, *.py gibi sadece onaylı betiklerin çalışmasına olanak sağlamakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.2.7';

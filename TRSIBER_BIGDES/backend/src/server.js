@@ -96,8 +96,8 @@ app.post('/login', async (req, res) => {
                 name: user.name,
                 surname: user.surname,
                 email: user.email,
-                username: user.username
-                // Şifreyi client'a gönderme
+                username: user.username,
+                role: user.role
             }
         });
     } catch (error) {

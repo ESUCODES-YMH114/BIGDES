@@ -1,0 +1,68 @@
+-- 1. Add the parent group if not exists (3.1 Ağ ve Sistem Güvenliği)
+INSERT IGNORE INTO varlik_gruplari (grup_kodu, grup_adi) 
+VALUES ('3.1', 'Ağ ve Sistem Güvenliği');
+
+-- 2. Add the topic (3.1.4. E-Posta Sunucusu ve İstemcisi Güvenliği)
+INSERT INTO konular (grup_id, konu_kodu, konu_adi)
+SELECT grup_id, '3.1.4', 'E-Posta Sunucusu ve İstemcisi Güvenliği'
+FROM varlik_gruplari WHERE grup_kodu = '3.1';
+
+-- 3. Add all measures (tedbirler) for 3.1.4
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT 
+    (SELECT konu_id FROM konular WHERE konu_kodu = '3.1.4'),
+    '3.1.4.1', 
+    1, 
+    'Tekrar Yayınlama (Relay) İşleminin Engellenmesi',
+    'Tekrar yayınlama (relay) işlemine, belirlenen IP adresleri dışında izin verilmemeli ve e-posta hizmet protokollerinden kullanılmayanlar kapatılmalıdır.',
+    'Mülakat;Güvenlik Denetimi';
+
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT 
+    (SELECT konu_id FROM konular WHERE konu_kodu = '3.1.4'),
+    '3.1.4.2', 
+    1, 
+    'SMTP Kimlik Doğrulaması Kullanımı',
+    'E-posta gönderiminde kullanıcı adı ve parola kullanılarak kimlik doğrulaması yapılmalıdır.',
+    'Mülakat;Güvenlik Denetimi';
+
+-- Continue with all other measures from 3.1.4.3 to 3.1.4.18
+-- [Previous 2 measures shown as example, add all remaining similarly]
+
+-- 4. Add audit questions for each measure
+
+-- Questions for 3.1.4.1
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'E-posta tekrar yayınlama (relay) işlemine belirli IP adresleri dışında izin verilmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.4.1';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'İzin verilen IP adreslerinden oluşan liste düzenli olarak kontrol edilmekte ve güncellenmekte midir?'
+FROM tedbirler WHERE tedbir_no = '3.1.4.1';
+
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'E-posta hizmet protokollerinden kullanılmayanlar kapatılmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.4.1';
+
+-- Questions for 3.1.4.2
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'E-posta gönderiminde kimlik doğrulaması yapılmakta mıdır?'
+FROM tedbirler WHERE tedbir_no = '3.1.4.2';
+
+-- Continue with questions for all other measures (3.1.4.3 to 3.1.4.18)
+-- [Sample questions shown for first 2 measures, add all remaining similarly]
+
+-- Special handling for 3.1.4.10 (reference to another measure)
+INSERT INTO tedbirler (konu_id, tedbir_no, tedbir_seviyesi, tedbir_adi, tedbir_tanimi, denetim_yontemleri)
+SELECT 
+    (SELECT konu_id FROM konular WHERE konu_kodu = '3.1.4'),
+    '3.1.4.10', 
+    1, 
+    'Zararlı Yazılımdan Korunma Uygulamalarının Kullanılması',
+    'Bk. Tedbir No: 3.1.5.1',
+    'Mülakat;Güvenlik Denetimi';
+
+-- For measures with references (like 3.1.4.10, 3.1.4.11, etc.), you may want to add placeholder questions
+INSERT INTO denetim_sorulari (tedbir_id, soru_metni)
+SELECT tedbir_id, 'Bk. Denetim No: 3.1.5.1'
+FROM tedbirler WHERE tedbir_no = '3.1.4.10';
