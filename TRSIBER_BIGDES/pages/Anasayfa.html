@@ -27,6 +27,7 @@
                 <div class="settings-dropdown" id="settingsDropdown"> <!--MENUDE BULUNAN SEÇENEKLER-->
                     <a href="profil.html"><i class="fas fa-user"></i> Profil</a>
                     <a href="denetimlerim.html"><i class="fas fa-list"></i> Denetimlerim</a>
+                    <a href="admin_panel.html" id="adminPanelLink" style="display: none;"><i class="fas fa-cog"></i> Admin Paneli</a>
                     <a href="index.html" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
                 </div>
             </div>
@@ -106,6 +107,12 @@
             // Kullanıcı adını göster
             const denetciIsmiElement = document.getElementById('denetciIsmi');
             denetciIsmiElement.textContent = `${userData.name} ${userData.surname}`;
+
+            // Admin paneli linkini göster/gizle
+            const adminPanelLink = document.getElementById('adminPanelLink');
+            if (userData.role === 'admin') {
+                adminPanelLink.style.display = 'block';
+            }
 
             // Dropdown menü işlemleri
             const settingsBtn = document.getElementById('settingsBtn');
