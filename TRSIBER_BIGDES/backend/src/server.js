@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 const bcrypt = require('bcrypt');
+const axios = require('axios');
 
 const app = express();
 
@@ -56,6 +57,17 @@ app.get('/denetimlerim.html', (req, res) => {
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
+        // reCAPTCHA doğrulaması geçici olarak devre dışı
+        // const { recaptcha } = req.body;
+        // if (!recaptcha) {
+        //     return res.status(400).json({ error: 'reCAPTCHA doğrulaması başarısız' });
+        // }
+        // const secretKey = '6LfJdFIrAAAAAEAmDNcVyPoMwCizZRG2O0NzyWRS';
+        // const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptcha}`;
+        // const recaptchaRes = await axios.post(verificationURL);
+        // if (!recaptchaRes.data.success) {
+        //     return res.status(400).json({ error: 'reCAPTCHA doğrulaması başarısız' });
+        // }
         
         // Email parametresini sanitize et
         const sanitizedEmail = email.replace(/[^\w\s@.-]/g, '');
