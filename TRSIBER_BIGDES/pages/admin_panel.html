@@ -32,7 +32,7 @@
                     <a href="#loglar"><i class="fas fa-history"></i> Log Kayıtları</a>
                 </li>
                 <li>
-                    <a href="Anasayfa.html" id="cikisBtn"><i class="fas fa-sign-out-alt"></i> Anasayfaya  Dön</a>
+                    <a href="Anasayfa.html" id="cikisBtn"><i class="fas fa-sign-out-alt"></i> Anasayfaya Dön</a>
                 </li>
             </ul>
         </nav>
@@ -169,26 +169,6 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Toplam Denetçi</h3>
-                        <p class="stat-number">24</p>
-                        <span class="stat-change positive">+2 bu ay</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Aktif Kurum</h3>
-                        <p class="stat-number">156</p>
-                        <span class="stat-change positive">+12 bu ay</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
                         <i class="fas fa-tasks"></i>
                     </div>
                     <div class="stat-info">
@@ -209,17 +189,6 @@
                 </div>
             </div>
 
-            <div class="charts-grid">
-                <div class="chart-card">
-                    <h3>Aylık Denetim İstatistikleri</h3>
-                    <canvas id="denetimChart"></canvas>
-                </div>
-                <div class="chart-card">
-                    <h3>Sektör Dağılımı</h3>
-                    <canvas id="sektorChart"></canvas>
-                </div>
-            </div>
-
             <div class="recent-activity">
                 <h3>Son Aktiviteler</h3>
                 <div class="activity-list">
@@ -228,8 +197,19 @@
                             <i class="fas fa-file-alt"></i>
                         </div>
                         <div class="activity-details">
-                            <p>Yeni denetim raporu yüklendi</p>
-                            <span class="activity-time">2 saat önce</span>
+                            <div class="activity-header">
+                                <h4>Yeni Denetim Raporu Yüklendi</h4>
+                                <span class="activity-time">15.03.2024 - 14:30</span>
+                            </div>
+                            <p class="activity-description">Web Uygulama Güvenlik Denetimi raporu sisteme yüklendi</p>
+                            <div class="activity-meta">
+                                <span class="activity-user">
+                                    <i class="fas fa-user"></i> Ahmet Yılmaz
+                                </span>
+                                <span class="activity-target">
+                                    <i class="fas fa-building"></i> ABC Teknoloji A.Ş.
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="activity-item">
@@ -237,17 +217,39 @@
                             <i class="fas fa-user-plus"></i>
                         </div>
                         <div class="activity-details">
-                            <p>Yeni denetçi eklendi</p>
-                            <span class="activity-time">5 saat önce</span>
+                            <div class="activity-header">
+                                <h4>Yeni Denetçi Eklendi</h4>
+                                <span class="activity-time">15.03.2024 - 11:15</span>
+                            </div>
+                            <p class="activity-description">Sisteme yeni denetçi kaydı oluşturuldu</p>
+                            <div class="activity-meta">
+                                <span class="activity-user">
+                                    <i class="fas fa-user"></i> Mehmet Demir
+                                </span>
+                                <span class="activity-target">
+                                    <i class="fas fa-id-card"></i> Denetçi ID: DNT025
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="activity-item">
                         <div class="activity-icon">
-                            <i class="fas fa-building"></i>
+                            <i class="fas fa-edit"></i>
                         </div>
                         <div class="activity-details">
-                            <p>Yeni kurum kaydı oluşturuldu</p>
-                            <span class="activity-time">1 gün önce</span>
+                            <div class="activity-header">
+                                <h4>Denetim Güncellendi</h4>
+                                <span class="activity-time">14.03.2024 - 16:45</span>
+                            </div>
+                            <p class="activity-description">Mobil Uygulama Güvenlik Denetimi güncellendi</p>
+                            <div class="activity-meta">
+                                <span class="activity-user">
+                                    <i class="fas fa-user"></i> Ayşe Kaya
+                                </span>
+                                <span class="activity-target">
+                                    <i class="fas fa-building"></i> XYZ Yazılım Ltd.
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
