@@ -674,6 +674,88 @@ body {
     background-color: #546E7A;
 }
 
+/* Denetimler Grid */
+.denetimler-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.denetim-card {
+    background: var(--card-background);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.denetim-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.denetim-header h3 {
+    font-size: 1.1rem;
+    margin-right: 1rem;
+}
+
+.denetim-durum {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.denetim-durum.aktif {
+    background: rgba(76, 175, 80, 0.1);
+    color: var(--success-color);
+}
+
+.denetim-durum.tamamlandi {
+    background: rgba(33, 150, 243, 0.1);
+    color: var(--primary-color);
+}
+
+.denetim-detay {
+    margin-bottom: 1.5rem;
+}
+
+/* Log Kayıtları Tablosu */
+.loglar-table {
+    background: var(--card-background);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+.loglar-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.loglar-table th,
+.loglar-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.loglar-table th {
+    background: var(--background-color);
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.loglar-table tr:last-child td {
+    border-bottom: none;
+}
+
+.loglar-table tr:hover {
+    background: var(--background-color);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .denetciler-grid,
@@ -694,5 +776,19 @@ body {
     .btn-secondary {
         width: 100%;
         justify-content: center;
+    }
+    
+    .denetimler-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .loglar-table {
+        padding: 1rem;
+    }
+    
+    .loglar-table th,
+    .loglar-table td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
     }
 } 

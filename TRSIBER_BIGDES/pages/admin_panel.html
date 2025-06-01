@@ -121,6 +121,41 @@
             </div>
         </div>
 
+        <!-- Denetimler Sekmesi -->
+        <div id="denetimler" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Denetimler</h2>
+            </div>
+            <div class="denetimler-grid">
+                <!-- Örnek denetim kartı -->
+                <div class="denetim-card">
+                    <div class="denetim-header">
+                        <h3>Web Uygulama Güvenlik Denetimi</h3>
+                        <span class="denetim-durum aktif">Devam Ediyor</span>
+                    </div>
+                    <div class="denetim-detay">
+                        <div class="detay-item">
+                            <span class="detay-label">Denetlenen Kurum:</span>
+                            <span class="detay-value">ABC Teknoloji A.Ş.</span>
+                        </div>
+                        <div class="detay-item">
+                            <span class="detay-label">Denetçi:</span>
+                            <span class="detay-value">Ahmet Yılmaz</span>
+                        </div>
+                        <div class="detay-item">
+                            <span class="detay-label">Başlangıç:</span>
+                            <span class="detay-value">15.03.2024</span>
+                        </div>
+                    </div>
+                    <div class="denetim-actions">
+                        <button class="btn-secondary">
+                            <i class="fas fa-eye"></i> Detaylar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Raporlar Sekmesi -->
         <div id="raporlar" class="content-section" style="display: none;">
             <div class="section-header">
@@ -161,6 +196,39 @@
                     </div>
                 </div>
                 <!-- Diğer rapor kartları buraya eklenecek -->
+            </div>
+        </div>
+
+        <!-- Log Kayıtları Sekmesi -->
+        <div id="loglar" class="content-section" style="display: none;">
+            <div class="section-header">
+                <h2>Log Kayıtları</h2>
+            </div>
+            <div class="loglar-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tarih</th>
+                            <th>Kullanıcı</th>
+                            <th>İşlem</th>
+                            <th>Detay</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>15.03.2024 14:30</td>
+                            <td>Ahmet Yılmaz</td>
+                            <td>Giriş Yapıldı</td>
+                            <td>Admin paneli</td>
+                        </tr>
+                        <tr>
+                            <td>15.03.2024 14:35</td>
+                            <td>Ahmet Yılmaz</td>
+                            <td>Denetçi Eklendi</td>
+                            <td>Mehmet Demir (DNT025)</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -319,6 +387,12 @@
                 raporlar: document.getElementById('raporlar'),
                 loglar: document.getElementById('loglar')
             };
+
+            // Sayfa yüklendiğinde dashboard'ı göster
+            Object.values(sections).forEach(section => {
+                if (section) section.style.display = 'none';
+            });
+            sections.dashboard.style.display = 'block';
 
             document.querySelectorAll('.sidebar-nav a').forEach(link => {
                 link.addEventListener('click', function(e) {
