@@ -206,6 +206,14 @@
                     }
                 }, 200);
             }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const userData = JSON.parse(localStorage.getItem('user'));
+                const adminPanelLink = document.getElementById('adminPanelLink');
+                if (adminPanelLink && userData && userData.role === 'admin') {
+                    adminPanelLink.style.display = 'block';
+                }
+            });
         });
     </script>
 </body>
