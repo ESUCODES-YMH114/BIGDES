@@ -49,13 +49,13 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="../assets/js/particles/particles_login.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
         document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            
             try {
                 const response = await fetch('/login', {
                     method: 'POST',

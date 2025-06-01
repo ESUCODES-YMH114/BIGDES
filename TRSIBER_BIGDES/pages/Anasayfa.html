@@ -213,6 +213,10 @@
                     adminPanelLink.style.display = 'block';
                 }
             });
+
+            document.getElementById('settingsBtn').addEventListener('click', function() {
+                document.getElementById('settingsDropdown').classList.toggle('active');
+            });
         });
     </script>
 </body>
