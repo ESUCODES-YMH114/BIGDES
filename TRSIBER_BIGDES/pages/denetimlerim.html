@@ -524,10 +524,16 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function() {
             const userData = JSON.parse(localStorage.getItem('user'));
-            if (!userData || userData.role !== 'admin') {
-                window.location.replace('Anasayfa.html');
+            if (!userData) {
+                window.location.replace('index.html');
+                return;
+            }
+            document.getElementById('denetciIsmi').textContent = `${userData.name} ${userData.surname}`;
+            const adminPanelLink = document.getElementById('adminPanelLink');
+            if (userData.role === 'admin') {
+                adminPanelLink.style.display = 'block';
             }
         });
     </script>
