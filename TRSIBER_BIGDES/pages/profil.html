@@ -220,99 +220,35 @@
     <script src="../assets/js/particles/particles_header.js"></script>
     <script src="../assets/js/particles/particles_footer.js"></script>
     <script>
-<<<<<<< HEAD
-        // Oturum kontrolü ve profil bilgilerini yükleme
-        function checkAuth() {
-            const userData = JSON.parse(localStorage.getItem('user'));
-            if (!userData) {
-                
-                return;
-            }
+document.addEventListener('DOMContentLoaded', function() {
+    // Kullanıcı adını göster
+    const userData = JSON.parse(localStorage.getItem('user'));
+    const denetciIsmi = document.getElementById('denetciIsmi');
+    if (userData && denetciIsmi) {
+        denetciIsmi.textContent = `${userData.name} ${userData.surname}`;
+    }
 
-            // Profil bilgilerini göster
-            document.getElementById('denetciIsmi').textContent = `${userData.name} ${userData.surname}`;
-            document.querySelector('input[type="text"][value=""]').value = userData.name;
-            document.querySelector('input[type="text"][value=""]').value = userData.surname;
-            document.querySelector('input[type="email"]').value = userData.email;
-        }
-
-        // Sayfa yüklendiğinde oturum kontrolü yap
-        document.addEventListener('DOMContentLoaded', checkAuth);
-
-        // Çıkış yap butonu için event listener
-        document.querySelector('a[href="index.html"]').addEventListener('click', function(e) {
-            e.preventDefault();
-			}
-        // Ayarlar menüsü için
-        document.querySelector('.settings-btn').addEventListener('click', function() {
-            document.querySelector('.settings-dropdown').classList.toggle('active');
+    // Dropdown menü aç/kapat
+    const settingsBtn = document.getElementById('settingsBtn');
+    const settingsDropdown = document.getElementById('settingsDropdown');
+    if (settingsBtn && settingsDropdown) {
+        settingsBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            settingsDropdown.classList.toggle('active');
         });
-
-        // Şifre göster/gizle fonksiyonu
-        function togglePassword(input, button) {
-            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-            input.setAttribute('type', type);
-            button.querySelector('i').classList.toggle('fa-eye');
-            button.querySelector('i').classList.toggle('fa-eye-slash');
-        }
-
-        // Şifre gücü kontrolü
-        function checkPasswordStrength(password) {
-            let strength = 0;
-            if (password.length >= 8) strength++;
-            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
-            if (password.match(/\d/)) strength++;
-            if (password.match(/[^a-zA-Z\d]/)) strength++;
-
-            const strengthBar = document.querySelector('.strength-bar');
-            const strengthText = document.querySelector('.strength-text');
-            
-            if (strengthBar && strengthText) {
-                if (strength <= 1) {
-                    strengthBar.setAttribute('data-strength', 'weak');
-                    strengthText.textContent = 'Şifre gücü: Zayıf';
-                } else if (strength <= 2) {
-                    strengthBar.setAttribute('data-strength', 'medium');
-                    strengthText.textContent = 'Şifre gücü: Orta';
-                } else {
-                    strengthBar.setAttribute('data-strength', 'strong');
-                    strengthText.textContent = 'Şifre gücü: Güçlü';
-                }
-            }
-        }
-
-        // Sayfa yüklendiğinde
-=======
->>>>>>> e615d0c892d94a70328b2411e51992d261a8b4d3
-        document.addEventListener('DOMContentLoaded', function() {
-            // Kullanıcı adını göster
-            const userData = JSON.parse(localStorage.getItem('user'));
-            const denetciIsmi = document.getElementById('denetciIsmi');
-            if (userData && denetciIsmi) {
-                denetciIsmi.textContent = `${userData.name} ${userData.surname}`;
-            }
-
-            // Dropdown menü aç/kapat
-            const settingsBtn = document.getElementById('settingsBtn');
-            const settingsDropdown = document.getElementById('settingsDropdown');
-            if (settingsBtn && settingsDropdown) {
-                settingsBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    settingsDropdown.classList.toggle('active');
-                });
-                document.addEventListener('click', function(e) {
-                    if (!settingsDropdown.contains(e.target) && !settingsBtn.contains(e.target)) {
-                        settingsDropdown.classList.remove('active');
-                    }
-                });
-            }
-
-            // Admin panel linkini sadece adminlere göster
-            const adminPanelLink = document.getElementById('adminPanelLink');
-            if (adminPanelLink && userData && userData.role === 'admin') {
-                adminPanelLink.style.display = 'block';
+        document.addEventListener('click', function(e) {
+            if (!settingsDropdown.contains(e.target) && !settingsBtn.contains(e.target)) {
+                settingsDropdown.classList.remove('active');
             }
         });
+    }
+
+    // Admin panel linkini sadece adminlere göster
+    const adminPanelLink = document.getElementById('adminPanelLink');
+    if (adminPanelLink && userData && userData.role === 'admin') {
+        adminPanelLink.style.display = 'block';
+    }
+});
     </script>
 </body>
 </html>
