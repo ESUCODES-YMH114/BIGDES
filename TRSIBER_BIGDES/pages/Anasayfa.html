@@ -98,6 +98,34 @@
     <script src="../assets/js/particles/particles_header.js"></script>
     <script src="../assets/js/particles/particles_footer.js"></script>
     <script>
+        // Token kontrolü
+        function checkAuth() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/index.html';
+                return;
+            }
+
+            // Token'ı her sayfa yüklendiğinde doğrula
+            fetch('/api/verify-token', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Token geçersiz');
+                }
+            }).catch(error => {
+                console.error('Token doğrulama hatası:', error);
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.location.href = '/index.html';
+            });
+        }
+
+        // Sayfa yüklendiğinde token kontrolü yap
+        document.addEventListener('DOMContentLoaded', checkAuth);
+
         document.addEventListener('DOMContentLoaded', () => {
             // Denetçi bilgilerini yükle
             const userData = JSON.parse(localStorage.getItem('user'));

@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -26,6 +27,27 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // User modelini import et
 const User = require('./models/User');
+
+// JWT secret key - production ortamında environment variable olarak saklanmalı
+const JWT_SECRET = 'your-secret-key';
+
+// JWT token doğrulama middleware'i
+const authenticateToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).json({ error: 'Yetkilendirme token\'ı bulunamadı' });
+    }
+
+    jwt.verify(token, JWT_SECRET, (err, user) => {
+        if (err) {
+            return res.status(403).json({ error: 'Geçersiz token' });
+        }
+        req.user = user;
+        next();
+    });
+};
 
 // Statik dosyaları serve et
 app.use(express.static(path.join(__dirname, '../../')));
@@ -105,6 +127,21 @@ app.post('/login', async (req, res) => {
         console.error('Bir hata oluştu:', error);
         res.status(500).json({ error: 'Giriş başarısız' });
     }
+});
+
+// Korumalı sayfalar için middleware
+const protectedPages = [
+    '/Anasayfa.html',
+    '/admin_panel.html',
+    '/denetimlerim.html',
+    '/profil.html'
+];
+
+// Korumalı sayfalar için route handler
+protectedPages.forEach(page => {
+    app.get(page, authenticateToken, (req, res) => {
+        res.sendFile(path.join(__dirname, '../../pages', page));
+    });
 });
 
 const PORT = process.env.PORT || 3000;

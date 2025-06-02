@@ -55,9 +55,9 @@
             
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            
+
             try {
-                const response = await fetch('/login', {
+                const response = await fetch('/api/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -68,16 +68,23 @@
                 const data = await response.json();
 
                 if (response.ok) {
+                    // Token'ı localStorage'a kaydet
+                    localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
-                    window.location.href = 'Anasayfa.html';
+                    
+                    // Kullanıcı rolüne göre yönlendirme yap
+                    if (data.user.role === 'admin') {
+                        window.location.href = '/admin_panel.html';
+                    } else {
+                        window.location.href = '/Anasayfa.html';
+                    }
                 } else {
-                    alert('Giriş başarısız');
+                    alert(data.error || 'Giriş başarısız');
                 }
-            }catch (error) {
-				console.error(error);
-				//try koyulmuş catch koyulmamış giriş yapılamıyordu fixledim eren bne
-			} 
-			
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('Giriş yapılırken bir hata oluştu');
+            }
         });
     </script>
 </body>
