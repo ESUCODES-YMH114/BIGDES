@@ -327,70 +327,80 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Tüm içerik bölümlerini seç
-            const sections = {
-                dashboard: document.querySelector('.dashboard-content'),
-                denetciler: document.getElementById('denetciler'),
-                denetimler: document.getElementById('denetimler'),
-                raporlar: document.getElementById('raporlar'),
-                loglar: document.getElementById('loglar')
-            };
+            // Get all navigation links and content sections
+            const navLinks = document.querySelectorAll('.sidebar-nav a');
+            const contentSections = document.querySelectorAll('.content-section');
+            const dashboardContent = document.querySelector('.dashboard-content');
 
-            // Sayfa yüklendiğinde dashboard'ı göster
-            Object.values(sections).forEach(section => {
-                if (section) section.style.display = 'none';
-            });
-            if (sections.dashboard) sections.dashboard.style.display = 'block';
+            // Function to show a specific section and hide others
+            function showSection(sectionId) {
+                // Hide all content sections
+                contentSections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                if (dashboardContent) {
+                    dashboardContent.style.display = 'none';
+                }
 
-            // Sidebar linklerine tıklama olayı ekle
-            document.querySelectorAll('.sidebar-nav a').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // Çıkış butonu için özel işlem
-                    if (this.id === 'cikisBtn') {
-                        localStorage.removeItem('user');
-                        return;
+                // Show the selected section
+                if (sectionId === 'dashboard') {
+                    if (dashboardContent) {
+                        dashboardContent.style.display = 'block';
                     }
+                } else {
+                    const selectedSection = document.getElementById(sectionId);
+                    if (selectedSection) {
+                        selectedSection.style.display = 'block';
+                    }
+                }
 
+                // Update active state in navigation
+                navLinks.forEach(link => {
+                    const parent = link.parentElement;
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        parent.classList.add('active');
+                    } else {
+                        parent.classList.remove('active');
+                    }
+                });
+            }
+
+            // Add click event listeners to navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
-                    // Aktif menü öğesini güncelle
-                    document.querySelector('.sidebar-nav li.active')?.classList.remove('active');
-                    this.parentElement.classList.add('active');
-                    
-                    // Tüm bölümleri gizle
-                    Object.values(sections).forEach(section => {
-                        if (section) section.style.display = 'none';
-                    });
-                    
-                    // Seçilen bölümü göster
-                    const targetId = this.getAttribute('href').substring(1);
-                    if (sections[targetId]) {
-                        sections[targetId].style.display = 'block';
+                    const sectionId = this.getAttribute('href').substring(1);
+                    if (sectionId !== 'Anasayfa') {
+                        showSection(sectionId);
                     }
                 });
             });
 
-            // Modal işlevselliği
+            // Show dashboard by default
+            showSection('dashboard');
+
+            // Handle new denetçi button click
+            const yeniDenetciBtn = document.getElementById('yeniDenetciBtn');
             const modal = document.getElementById('yeniKullaniciModal');
-            const btn = document.getElementById('yeniDenetciBtn');
-            const span = document.getElementsByClassName('close')[0];
+            const closeBtn = document.querySelector('.close');
             const form = document.getElementById('yeniKullaniciForm');
 
-            if (btn) {
-                btn.onclick = function() {
-                    modal.style.display = "block";
-                }
+            if (yeniDenetciBtn && modal) {
+                yeniDenetciBtn.addEventListener('click', function() {
+                    modal.style.display = 'block';
+                });
             }
 
-            if (span) {
-                span.onclick = function() {
-                    modal.style.display = "none";
-                }
+            if (closeBtn && modal) {
+                closeBtn.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                });
             }
 
+            // Close modal when clicking outside
             window.onclick = function(event) {
                 if (event.target == modal) {
-                    modal.style.display = "none";
+                    modal.style.display = 'none';
                 }
             }
 
@@ -408,7 +418,7 @@
                     console.log('Yeni denetçi:', formData);
                     
                     form.reset();
-                    modal.style.display = "none";
+                    modal.style.display = 'none';
                     
                     alert('Denetçi başarıyla eklendi!');
                 };
