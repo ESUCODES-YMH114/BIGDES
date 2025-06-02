@@ -98,39 +98,11 @@
     <script src="../assets/js/particles/particles_header.js"></script>
     <script src="../assets/js/particles/particles_footer.js"></script>
     <script>
-        // Token kontrolü
-        function checkAuth() {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                window.location.href = '/index.html';
-                return;
-            }
-
-            // Token'ı her sayfa yüklendiğinde doğrula
-            fetch('/api/verify-token', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }).then(response => {
-                if (!response.ok) {
-                    throw new Error('Token geçersiz');
-                }
-            }).catch(error => {
-                console.error('Token doğrulama hatası:', error);
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
-                window.location.href = '/index.html';
-            });
-        }
-
-        // Sayfa yüklendiğinde token kontrolü yap
-        document.addEventListener('DOMContentLoaded', checkAuth);
-
         document.addEventListener('DOMContentLoaded', () => {
             // Denetçi bilgilerini yükle
             const userData = JSON.parse(localStorage.getItem('user'));
             if (!userData) {
-                window.location.replace('../index.html');
+                window.location.replace('index.html');
                 return;
             }
 
@@ -180,7 +152,7 @@
                 localStorage.clear();
                 sessionStorage.clear();
                 // Doğrudan giriş sayfasına git
-                window.location.href = window.location.origin;
+                window.location.href = 'index.html';
             });
 
             // Dosya yükleme işlemleri için
@@ -235,36 +207,6 @@
                     }
                 }, 200);
             }
-
-            document.addEventListener('DOMContentLoaded', function() {
-                // Kullanıcı adını göster
-                const userData = JSON.parse(localStorage.getItem('user'));
-                const denetciIsmi = document.getElementById('denetciIsmi');
-                if (userData && denetciIsmi) {
-                    denetciIsmi.textContent = `${userData.name} ${userData.surname}`;
-                }
-
-                // Dropdown menü aç/kapat
-                const settingsBtn = document.getElementById('settingsBtn');
-                const settingsDropdown = document.getElementById('settingsDropdown');
-                if (settingsBtn && settingsDropdown) {
-                    settingsBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        settingsDropdown.classList.toggle('active');
-                    });
-                    document.addEventListener('click', function(e) {
-                        if (!settingsDropdown.contains(e.target) && !settingsBtn.contains(e.target)) {
-                            settingsDropdown.classList.remove('active');
-                        }
-                    });
-                }
-
-                // Admin panel linkini sadece adminlere göster
-                const adminPanelLink = document.getElementById('adminPanelLink');
-                if (adminPanelLink && userData && userData.role === 'admin') {
-                    adminPanelLink.style.display = 'block';
-                }
-            });
         });
     </script>
 </body>
