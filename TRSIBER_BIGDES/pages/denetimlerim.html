@@ -520,6 +520,34 @@
                 adminPanelLink.style.display = 'block';
             }
         });
+
+        // --- Denetim Kartı Büyütme ---
+        document.querySelectorAll('.denetim-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Eğer zaten expanded ise veya tıklanan close butonuysa işlem yapma
+                if (card.classList.contains('expanded') || e.target.classList.contains('close-expanded')) return;
+                // Diğer kartların tıklanmasını engelle
+                document.querySelectorAll('.denetim-card').forEach(c => {
+                    if (c !== card) c.style.pointerEvents = 'none';
+                });
+                card.classList.add('expanded');
+                // Kapatma butonu ekle (sadece bir kez eklenmeli)
+                if (!card.querySelector('.close-expanded')) {
+                    const closeBtn = document.createElement('button');
+                    closeBtn.className = 'close-expanded';
+                    closeBtn.innerHTML = '&times;';
+                    closeBtn.title = 'Kapat';
+                    closeBtn.onclick = function(ev) {
+                        ev.stopPropagation();
+                        card.classList.remove('expanded');
+                        // Diğer kartların tıklanmasını tekrar aç
+                        document.querySelectorAll('.denetim-card').forEach(c => c.style.pointerEvents = 'auto');
+                        this.remove();
+                    };
+                    card.appendChild(closeBtn);
+                }
+            });
+        });
     </script>
 </body>
 </html> 

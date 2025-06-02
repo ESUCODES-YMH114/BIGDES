@@ -793,4 +793,57 @@ body::before {
     .satir-etkinligi-table td {
         padding: 0.5rem;
     }
+}
+
+.denetim-card.expanded {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.1);
+    width: 90vw;
+    max-width: 600px;
+    max-height: 90vh;
+    height: auto;
+    z-index: 3000;
+    background: #fff;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+    border: 2px solid #594BDB;
+    padding: 2.5rem 2rem;
+    overflow-y: auto;
+    transition: all 0.3s cubic-bezier(.4,2,.6,1);
+}
+.denetim-card.expanded::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.25);
+    z-index: -1;
+}
+.denetim-card.expanded .close-expanded {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #594BDB;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width: 768px) {
+    .denetim-card.expanded {
+        width: 98vw;
+        max-width: 98vw;
+        padding: 1.2rem 0.5rem;
+    }
+    .denetim-card.expanded .close-expanded {
+        top: 0.5rem;
+        right: 0.5rem;
+    }
 } 
