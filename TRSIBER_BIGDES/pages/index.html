@@ -67,11 +67,10 @@
 
                 const data = await response.json();
 
-                if (response.ok) {
+                if (response.ok && data.success) {
                     // Kullanıcı bilgilerini localStorage'a kaydet
                     localStorage.setItem('user', JSON.stringify(data.user));
-                    
-                    // Her durumda Anasayfa.html'e yönlendir
+                    // Doğrudan Anasayfa.html'e yönlendir
                     window.location.href = 'Anasayfa.html';
                 } else {
                     alert(data.error || 'Giriş başarısız');

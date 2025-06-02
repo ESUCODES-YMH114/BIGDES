@@ -89,16 +89,20 @@ app.post('/login', async (req, res) => {
 
         // Başarılı giriş durumunda
         console.log(`Başarılı giriş: ${sanitizedEmail}`);
+        
+        // Kullanıcı bilgilerini döndür (şifre hariç)
+        const userResponse = {
+            id: user._id,
+            name: user.name,
+            surname: user.surname,
+            email: user.email,
+            username: user.username,
+            role: user.role
+        };
+
         res.json({
             success: true,
-            user: {
-                id: user._id,
-                name: user.name,
-                surname: user.surname,
-                email: user.email,
-                username: user.username,
-                role: user.role
-            }
+            user: userResponse
         });
     } catch (error) {
         // Genel hata durumunda spesifik hata vermeden genel bir mesaj döndür
