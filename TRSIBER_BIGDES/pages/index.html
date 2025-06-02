@@ -71,12 +71,8 @@
                     // Kullanıcı bilgilerini localStorage'a kaydet
                     localStorage.setItem('user', JSON.stringify(data.user));
                     
-                    // Kullanıcı rolüne göre yönlendirme yap
-                    if (data.user.role === 'admin') {
-                        window.location.href = 'admin_panel.html';
-                    } else {
-                        window.location.href = 'Anasayfa.html';
-                    }
+                    // Her durumda Anasayfa.html'e yönlendir
+                    window.location.href = 'Anasayfa.html';
                 } else {
                     alert(data.error || 'Giriş başarısız');
                 }
