@@ -38,20 +38,6 @@ body {
     color: var(--text-color);
 }
 
-body.dark-mode {
-    background: linear-gradient(180deg, rgba(3,3,3,1) 0%, rgba(50,50,50,1) 20%, rgba(150,150,150,1) 40%, rgba(200,200,200,1) 60%, rgba(240,240,240,1) 80%, rgba(255,255,255,1) 100%);
-    --primary-color: #181818;
-    --secondary-color: #232323;
-    --dark-bg: #000000;
-    --accent-color: #8ab4f8;
-    --text-color: #e0e0e0;
-    --text-light: #ffffff;
-    --card-bg: rgba(30, 30, 30, 0.95);
-    --hover-color: #232323;
-    --border-color: #444;
-    --shadow-color: rgba(0,0,0,0.5);
-}
-
 /* Particles Containers */
 .header-particles-container,
 .body-particles-container,
