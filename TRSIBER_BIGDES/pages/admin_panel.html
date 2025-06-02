@@ -32,7 +32,7 @@
                     <a href="#loglar"><i class="fas fa-history"></i> Log Kayıtları</a>
                 </li>
                 <li>
-                    <a href="Anasayfa.html" id="cikisBtn"><i class="fas fa-sign-out-alt"></i> Anasayfaya   Dön</a>
+                    <a href="Anasayfa.html" id="cikisBtn"><i class="fas fa-sign-out-alt"></i> Anasayfaya Dön</a>
                 </li>
             </ul>
         </nav>
@@ -326,60 +326,8 @@
     </main>
 
     <script>
-        // Grafik verilerini yükle
-        window.onload = function() {
-            // Denetim istatistikleri grafiği
-            const denetimCtx = document.getElementById('denetimChart').getContext('2d');
-
-            // Sektör dağılımı grafiği
-            const sektorCtx = document.getElementById('sektorChart').getContext('2d');
-            
-            // Modal işlevselliği
-            const modal = document.getElementById('yeniKullaniciModal');
-            const btn = document.getElementById('yeniDenetciBtn');
-            const span = document.getElementsByClassName('close')[0];
-            const form = document.getElementById('yeniKullaniciForm');
-
-            // Modal'ı aç
-            btn.onclick = function() {
-                modal.style.display = "block";
-            }
-
-            // Modal'ı kapat
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
-
-            // Modal dışına tıklandığında kapat
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-
-            // Form gönderimi
-            form.onsubmit = function(e) {
-                e.preventDefault();
-                
-                const formData = {
-                    ad: document.getElementById('ad').value,
-                    soyad: document.getElementById('soyad').value,
-                    email: document.getElementById('email').value,
-                    sifre: document.getElementById('sifre').value
-                };
-
-                // Burada API'ye kullanıcı kayıt isteği gönderilecek
-                console.log('Yeni denetçi:', formData);
-                
-                // Formu temizle ve modalı kapat
-                form.reset();
-                modal.style.display = "none";
-                
-                // Başarılı mesajı göster
-                alert('Denetçi başarıyla eklendi!');
-            };
-
-            // Sekme değiştirme işlevselliği
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tüm içerik bölümlerini seç
             const sections = {
                 dashboard: document.querySelector('.dashboard-content'),
                 denetciler: document.getElementById('denetciler'),
@@ -392,21 +340,21 @@
             Object.values(sections).forEach(section => {
                 if (section) section.style.display = 'none';
             });
-            sections.dashboard.style.display = 'block';
+            if (sections.dashboard) sections.dashboard.style.display = 'block';
 
+            // Sidebar linklerine tıklama olayı ekle
             document.querySelectorAll('.sidebar-nav a').forEach(link => {
                 link.addEventListener('click', function(e) {
                     // Çıkış butonu için özel işlem
                     if (this.id === 'cikisBtn') {
-                        // LocalStorage'dan kullanıcı bilgilerini temizle
                         localStorage.removeItem('user');
-                        return; // Normal yönlendirmeye devam et
+                        return;
                     }
 
                     e.preventDefault();
                     
                     // Aktif menü öğesini güncelle
-                    document.querySelector('.sidebar-nav li.active').classList.remove('active');
+                    document.querySelector('.sidebar-nav li.active')?.classList.remove('active');
                     this.parentElement.classList.add('active');
                     
                     // Tüm bölümleri gizle
@@ -421,7 +369,51 @@
                     }
                 });
             });
-        };
+
+            // Modal işlevselliği
+            const modal = document.getElementById('yeniKullaniciModal');
+            const btn = document.getElementById('yeniDenetciBtn');
+            const span = document.getElementsByClassName('close')[0];
+            const form = document.getElementById('yeniKullaniciForm');
+
+            if (btn) {
+                btn.onclick = function() {
+                    modal.style.display = "block";
+                }
+            }
+
+            if (span) {
+                span.onclick = function() {
+                    modal.style.display = "none";
+                }
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            if (form) {
+                form.onsubmit = function(e) {
+                    e.preventDefault();
+                    
+                    const formData = {
+                        ad: document.getElementById('ad').value,
+                        soyad: document.getElementById('soyad').value,
+                        email: document.getElementById('email').value,
+                        sifre: document.getElementById('sifre').value
+                    };
+
+                    console.log('Yeni denetçi:', formData);
+                    
+                    form.reset();
+                    modal.style.display = "none";
+                    
+                    alert('Denetçi başarıyla eklendi!');
+                };
+            }
+        });
     </script>
 </body>
 </html> 
