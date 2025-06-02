@@ -54,10 +54,6 @@
                             <i class="fas fa-user"></i>
                             <span>Profil Bilgileri</span>
                         </div>
-                        <div class="menu-item" data-section="contact-info">
-                            <i class="fas fa-address-card"></i>
-                            <span>İletişim Bilgileri</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -95,6 +91,9 @@
                     <!-- Profile Info Section -->
                     <div class="content-section" id="profile-info">
                         <h2>Profil Bilgileri</h2>
+                        <div class="profile-greeting" style="margin-bottom: 1rem; font-size: 1.2rem; color: #594BDB; font-weight: 500;">
+                            Merhaba <span id="profile-greeting-name"></span>
+                        </div>
                         <form class="profile-form">
 
                             <div class="form-group">
@@ -247,6 +246,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const adminPanelLink = document.getElementById('adminPanelLink');
     if (adminPanelLink && userData && userData.role === 'admin') {
         adminPanelLink.style.display = 'block';
+    }
+
+    // --- Sidebar Menü Tıklama ---
+    const menuItems = document.querySelectorAll('.menu-item');
+    const contentSections = document.querySelectorAll('.content-section');
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // Aktif butonu değiştir
+            menuItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+            // Kartları değiştir
+            const section = this.getAttribute('data-section');
+            contentSections.forEach(sec => {
+                if(sec.id === section) {
+                    sec.classList.add('active');
+                } else {
+                    sec.classList.remove('active');
+                }
+            });
+        });
+    });
+    // Profil Bilgileri başlığı altına isim soyisim yazdır
+    if(userData) {
+        const greetingName = document.getElementById('profile-greeting-name');
+        if(greetingName) {
+            greetingName.textContent = `${userData.name} ${userData.surname}`;
+        }
     }
 });
     </script>
