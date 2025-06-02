@@ -5,6 +5,23 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+:root {
+    --primary-color: #ffffff;
+    --secondary-color: #f8f9fa;
+    --dark-bg: #333333;
+    --accent-color: #007bff;
+    --text-color: #212529;
+    --text-light: #ffffff;
+    --border-radius: 10px;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --hover-color: #e9ecef;
+    --border-color: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --gradient-start: #f8f9fa;
+    --gradient-middle: #e9ecef;
+    --gradient-end: #333333;
+}
+
 body {
     min-height: 100vh;
     display: flex;
@@ -18,6 +35,21 @@ body {
         rgba(3, 3, 3, 1) 100%
     );
     position: relative;
+    color: var(--text-color);
+}
+
+body.dark-mode {
+    background: linear-gradient(180deg, rgba(3,3,3,1) 0%, rgba(50,50,50,1) 20%, rgba(150,150,150,1) 40%, rgba(200,200,200,1) 60%, rgba(240,240,240,1) 80%, rgba(255,255,255,1) 100%);
+    --primary-color: #181818;
+    --secondary-color: #232323;
+    --dark-bg: #000000;
+    --accent-color: #8ab4f8;
+    --text-color: #e0e0e0;
+    --text-light: #ffffff;
+    --card-bg: rgba(30, 30, 30, 0.95);
+    --hover-color: #232323;
+    --border-color: #444;
+    --shadow-color: rgba(0,0,0,0.5);
 }
 
 /* Particles Containers */
