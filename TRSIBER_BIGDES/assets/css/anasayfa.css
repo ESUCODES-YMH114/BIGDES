@@ -23,23 +23,6 @@
     --gradient-end: #333333;
 }
 
-[data-theme="dark"] {
-    /* Dark Mode Variables */
-    --primary-color: #121212;
-    --secondary-color: #1E1E1E;
-    --dark-bg: #000000;
-    --accent-color: #8A2BE2;
-    --text-color: #E0E0E0;
-    --text-light: #B0B0B0;
-    --card-bg: rgba(30, 30, 30, 0.9);
-    --hover-color: #2A2A2A;
-    --border-color: #303030;
-    --shadow-color: rgba(0, 0, 0, 0.3);
-    --gradient-start: #121212;
-    --gradient-middle: #1E1E1E;
-    --gradient-end: #000000;
-}
-
 body {
     min-height: 100vh;
     display: flex;
@@ -51,7 +34,6 @@ body {
     );
     position: relative;
     color: var(--text-color);
-    transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Particles Containers */
@@ -102,7 +84,6 @@ body {
     z-index: 1000;
     overflow: visible;
     height: 120px;
-    transition: background-color 0.3s ease;
 }
 
 .header-container {
@@ -201,7 +182,7 @@ body {
     box-shadow: 0 8px 32px var(--shadow-color);
     text-align: center;
     width: 100%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .upload-section:hover {
@@ -307,7 +288,6 @@ body {
     margin-top: auto;
     position: relative;
     overflow: hidden;
-    transition: background-color 0.3s ease;
 }
 
 .footer-container {
