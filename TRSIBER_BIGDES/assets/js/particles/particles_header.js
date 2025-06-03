@@ -8,7 +8,7 @@ particlesJS('header-particles', {
             }
         },
         color: {
-            value: '#000000'
+            value: '#444444'
         },
         shape: {
             type: 'circle'
@@ -36,7 +36,7 @@ particlesJS('header-particles', {
         line_linked: {
             enable: true,
             distance: 150,
-            color: '#594BDB',
+            color: '#8A2BE2',
             opacity: 0.2,
             width: 1
         },

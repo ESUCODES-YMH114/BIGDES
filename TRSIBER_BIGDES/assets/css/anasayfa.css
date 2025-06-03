@@ -6,6 +6,7 @@
 }
 
 :root {
+    /* Light Mode Variables */
     --primary-color: #ffffff;
     --secondary-color: #f8f9fa;
     --dark-bg: #333333;
@@ -22,20 +23,35 @@
     --gradient-end: #333333;
 }
 
+[data-theme="dark"] {
+    /* Dark Mode Variables */
+    --primary-color: #121212;
+    --secondary-color: #1E1E1E;
+    --dark-bg: #000000;
+    --accent-color: #8A2BE2;
+    --text-color: #E0E0E0;
+    --text-light: #B0B0B0;
+    --card-bg: rgba(30, 30, 30, 0.9);
+    --hover-color: #2A2A2A;
+    --border-color: #303030;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --gradient-start: #121212;
+    --gradient-middle: #1E1E1E;
+    --gradient-end: #000000;
+}
+
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     background: linear-gradient(180deg, 
-        rgba(255, 255, 255, 1) 0%,
-        rgba(240, 240, 240, 1) 20%,
-        rgba(200, 200, 200, 1) 40%,
-        rgba(150, 150, 150, 1) 60%,
-        rgba(50, 50, 50, 1) 80%,
-        rgba(3, 3, 3, 1) 100%
+        var(--gradient-start) 0%,
+        var(--gradient-middle) 50%,
+        var(--gradient-end) 100%
     );
     position: relative;
     color: var(--text-color);
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Particles Containers */
@@ -76,9 +92,9 @@ body {
 
 /* Header'ı şeffaf yapalım */
 .header {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: var(--card-bg);
     backdrop-filter: blur(5px);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px var(--shadow-color);
     padding: 1rem 0;
     position: fixed;
     width: 100%;
@@ -86,6 +102,7 @@ body {
     z-index: 1000;
     overflow: visible;
     height: 120px;
+    transition: background-color 0.3s ease;
 }
 
 .header-container {
@@ -177,14 +194,14 @@ body {
 }
 
 .upload-section {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--card-bg);
     backdrop-filter: blur(10px);
     padding: 3rem;
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px var(--shadow-color);
     text-align: center;
     width: 100%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .upload-section:hover {
@@ -193,14 +210,14 @@ body {
 }
 
 .upload-section h1 {
-    color: #333;
+    color: var(--text-color);
     margin-bottom: 1.5rem;
     font-size: 2rem;
     font-weight: 600;
 }
 
 .upload-section p {
-    color: #666;
+    color: var(--text-light);
     margin-bottom: 2.5rem;
     font-size: 1.1rem;
 }
@@ -211,24 +228,24 @@ body {
 }
 
 .upload-box {
-    border: 2.5px dashed #594BDB;
+    border: 2.5px dashed var(--accent-color);
     border-radius: 16px;
     padding: 3rem 2rem;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    background: rgba(89, 75, 219, 0.03);
+    background: rgba(138, 43, 226, 0.03);
 }
 
 .upload-box.drag-over {
-    background-color: rgba(89, 75, 219, 0.1);
-    border-color: #4a3eb8;
+    background-color: rgba(138, 43, 226, 0.1);
+    border-color: var(--accent-color);
     transform: scale(1.02);
 }
 
 .upload-box i {
     font-size: 4rem;
-    color: #594BDB;
+    color: var(--accent-color);
     margin-bottom: 1.5rem;
     transition: transform 0.3s ease;
 }
@@ -239,12 +256,12 @@ body {
 
 .upload-box p {
     margin-bottom: 2rem;
-    color: #555;
+    color: var(--text-light);
 }
 
 .upload-btn {
-    background-color: #594BDB;
-    color: white;
+    background-color: var(--accent-color);
+    color: var(--text-color);
     padding: 1rem 2.5rem;
     border: none;
     border-radius: 12px;
@@ -255,9 +272,9 @@ body {
 }
 
 .upload-btn:hover {
-    background-color: #4a3eb8;
+    background-color: #A64FFF;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(89, 75, 219, 0.3);
+    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
 }
 
 .upload-status {
@@ -283,13 +300,14 @@ body {
 
 /* Footer Styles */
 .footer {
-    background: #333333;
+    background: var(--secondary-color);
     backdrop-filter: blur(5px);
-    color: white;
+    color: var(--text-color);
     padding: 0.6rem 0;
     margin-top: auto;
     position: relative;
     overflow: hidden;
+    transition: background-color 0.3s ease;
 }
 
 .footer-container {
@@ -399,4 +417,33 @@ body {
     .upload-box {
         padding: 2rem 1rem;
     }
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+}
+
+.theme-toggle:hover {
+    background-color: var(--hover-color);
+    transform: scale(1.1);
+}
+
+.theme-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover i {
+    transform: rotate(30deg);
 } 

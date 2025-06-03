@@ -8,23 +8,35 @@ particlesJS('body-particles', {
             }
         },
         color: {
-            value: '#ffffff'
+            value: '#444444'
         },
         shape: {
             type: 'circle'
         },
         opacity: {
             value: 0.3,
-            random: true
+            random: true,
+            animation: {
+                enable: true,
+                speed: 1,
+                opacity_min: 0.1,
+                sync: false
+            }
         },
         size: {
             value: 4,
-            random: true
+            random: true,
+            animation: {
+                enable: true,
+                speed: 2,
+                size_min: 0.1,
+                sync: false
+            }
         },
         line_linked: {
             enable: true,
             distance: 150,
-            color: '#ffffff',
+            color: '#444444',
             opacity: 0.1,
             width: 1
         },
