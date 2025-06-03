@@ -420,9 +420,15 @@ body {
 }
 
 /* Theme Toggle Button */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .theme-toggle {
-    background: none;
-    border: none;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
     color: var(--text-color);
     font-size: 1.2rem;
     cursor: pointer;
@@ -432,11 +438,12 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    margin-left: 1rem;
+    width: 40px;
+    height: 40px;
 }
 
 .theme-toggle:hover {
-    background-color: var(--hover-color);
+    background: var(--hover-color);
     transform: scale(1.1);
 }
 
@@ -445,5 +452,5 @@ body {
 }
 
 .theme-toggle:hover i {
-    transform: rotate(30deg);
+    transform: rotate(180deg);
 } 
