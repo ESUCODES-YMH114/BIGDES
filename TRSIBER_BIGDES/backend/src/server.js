@@ -34,8 +34,10 @@ mongoose.connect(process.env.MONGODB_URI)
 // User modelini import et
 const User = require('./models/User');
 
-// Statik dosyaları serve et (assets ve pages klasörleri)
-app.use(express.static(path.join(__dirname, '../../assets')));
+// Statik dosyaları /assets path'i üzerinden serve et
+app.use('/assets', express.static(path.join(__dirname, '../../assets')));
+
+// Statik HTML dosyalarını serve et
 app.use(express.static(path.join(__dirname, '../../pages')));
 
 // Ana sayfayı yönlendir (hem / hem de /index.html için)
