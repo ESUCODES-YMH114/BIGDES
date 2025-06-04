@@ -1,4 +1,7 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const JWT_SECRET = 'gizli-anahtar-buraya'; // Production'da environment variable olarak saklanmalı
 
 async function generateHash() {
   try {
@@ -20,5 +23,17 @@ async function generateHash() {
     console.error('Hata:', error);
   }
 }
+
+const generateToken = (user) => {
+    return jwt.sign(
+        { 
+            id: user.id,
+            username: user.username,
+            role: user.role 
+        },
+        JWT_SECRET,
+        { expiresIn: '24h' }
+    );
+};
 
 generateHash(); 

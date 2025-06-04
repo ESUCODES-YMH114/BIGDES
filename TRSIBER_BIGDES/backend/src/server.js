@@ -2,17 +2,24 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const verifyToken = require('./middleware/auth');
 
 const app = express();
 
 // CORS ayarlarını güvenli hale getir
 const corsOptions = {
     origin: 'https://bigdes-3lh1.onrender.com',
+    credentials: true,
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
+
+// Cookie parser middleware'ini ekle
+app.use(cookieParser());
 
 // X-Powered-By header'ını kaldır
 app.disable('x-powered-by');
@@ -35,20 +42,20 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../../pages/index.html'));
 });
 
-// Diğer sayfalar için route'lar
-app.get('/Anasayfa.html', (req, res) => {
+// Korumalı sayfalar için middleware
+app.get('/Anasayfa.html', verifyToken, (req, res) => {
     res.sendFile(path.join(__dirname, '../../pages/Anasayfa.html'));
 });
 
-app.get('/profil.html', (req, res) => {
+app.get('/profil.html', verifyToken, (req, res) => {
     res.sendFile(path.join(__dirname, '../../pages/profil.html'));
 });
 
-app.get('/admin_panel.html', (req, res) => {
+app.get('/admin_panel.html', verifyToken, (req, res) => {
     res.sendFile(path.join(__dirname, '../../pages/admin_panel.html'));
 });
 
-app.get('/denetimlerim.html', (req, res) => {
+app.get('/denetimlerim.html', verifyToken, (req, res) => {
     res.sendFile(path.join(__dirname, '../../pages/denetimlerim.html'));
 });
 
@@ -60,36 +67,41 @@ app.post('/login', async (req, res) => {
         // Email parametresini sanitize et
         const sanitizedEmail = email.replace(/[^\w\s@.-]/g, '');
         
-        // Sadece email loglanabilir, şifre asla şifre değerini loglamayın!
         console.log(`Giriş denemesi: ${sanitizedEmail}`);
         
-        // Şifre ile birlikte kullanıcıyı bul (normalde select:false olduğu için)
         const user = await User.findOne({ email: sanitizedEmail }).select('+password');
 
-        console.log(`Kullanıcı bulundu mu?: ${!!user}`);
-        
-        // Kullanıcı bulunamadıysa
         if (!user) {
             console.log(`Kullanıcı bulunamadı: ${sanitizedEmail}`);
             return res.status(401).json({ error: 'Giriş başarısız' });
         }
 
-        console.log(`Veritabanındaki hash: ${user.password}`);
-        
-        // Şifre doğrulama - bcrypt.compare kullanarak
         const isPasswordValid = await bcrypt.compare(password, user.password);
         
-        console.log(`Şifre eşleşmesi: ${isPasswordValid}`);
-        
         if (!isPasswordValid) {
-            // Başarısız girişlerde özel hata mesajı yok
             console.log(`Şifre eşleşmedi: ${sanitizedEmail}`);
             return res.status(401).json({ error: 'Giriş başarısız' });
         }
 
-        // Başarılı giriş durumunda
-        console.log(`Başarılı giriş: ${sanitizedEmail}`);
-        
+        // JWT token oluştur
+        const token = jwt.sign(
+            { 
+                id: user._id,
+                email: user.email,
+                role: user.role 
+            },
+            process.env.JWT_SECRET || 'gizli-anahtar-buraya',
+            { expiresIn: '24h' }
+        );
+
+        // Token'ı HTTP-only cookie olarak ayarla
+        res.cookie('jwt', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 24 * 60 * 60 * 1000 // 24 saat
+        });
+
         // Kullanıcı bilgilerini döndür (şifre hariç)
         const userResponse = {
             id: user._id,
@@ -105,10 +117,15 @@ app.post('/login', async (req, res) => {
             user: userResponse
         });
     } catch (error) {
-        // Genel hata durumunda spesifik hata vermeden genel bir mesaj döndür
         console.error('Bir hata oluştu:', error);
         res.status(500).json({ error: 'Giriş başarısız' });
     }
+});
+
+// Çıkış yapma endpoint'i
+app.post('/logout', (req, res) => {
+    res.clearCookie('jwt');
+    res.json({ success: true });
 });
 
 const PORT = process.env.PORT || 3000;
