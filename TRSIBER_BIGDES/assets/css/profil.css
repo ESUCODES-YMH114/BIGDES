@@ -438,6 +438,49 @@ body {
     background: #00C851;
 }
 
+/* E-posta Alanı Stilleri */
+.email-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.email-container input {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(89, 75, 219, 0.2);
+    color: #333;
+    cursor: default;
+}
+
+.email-container input:focus {
+    outline: none;
+    border-color: rgba(89, 75, 219, 0.4);
+}
+
+.change-email-btn {
+    background: #594BDB;
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.change-email-btn:hover {
+    background: #4a3eb8;
+    transform: translateY(-2px);
+}
+
+.change-email-btn i {
+    font-size: 0.9rem;
+}
+
 /* Footer */
 .footer {
     background: #333333;

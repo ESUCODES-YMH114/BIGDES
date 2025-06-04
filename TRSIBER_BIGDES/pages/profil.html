@@ -95,13 +95,16 @@
                             Merhaba <span id="profile-greeting-name"></span>
                         </div>
                         <form class="profile-form">
-
-                        
                             <div class="form-group">
                                 <label>
-									E-posta
-                                    <input type="text" />
+                                    E-posta
                                 </label>
+                                <div class="email-container">
+                                    <input type="email" id="userEmail" readonly />
+                                    <button type="button" class="change-email-btn">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -213,6 +216,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const denetciIsmi = document.getElementById('denetciIsmi');
     if (userData && denetciIsmi) {
         denetciIsmi.textContent = `${userData.name} ${userData.surname}`;
+    }
+
+    // E-posta alanını doldur
+    const userEmail = document.getElementById('userEmail');
+    if (userData && userEmail) {
+        userEmail.value = userData.email;
+    }
+
+    // E-posta değiştirme butonu işlevi
+    const changeEmailBtn = document.querySelector('.change-email-btn');
+    if (changeEmailBtn) {
+        changeEmailBtn.addEventListener('click', function() {
+            const newEmail = prompt('Yeni e-posta adresinizi girin:');
+            if (newEmail) {
+                // E-posta doğrulama
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailRegex.test(newEmail)) {
+                    // Burada backend'e e-posta güncelleme isteği gönderilebilir
+                    userEmail.value = newEmail;
+                    alert('E-posta adresiniz başarıyla güncellendi!');
+                } else {
+                    alert('Lütfen geçerli bir e-posta adresi girin!');
+                }
+            }
+        });
     }
 
     // Dropdown menü aç/kapat
