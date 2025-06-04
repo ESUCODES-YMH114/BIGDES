@@ -6,7 +6,7 @@ const verifyToken = (req, res, next) => {
     const token = req.cookies.jwt;
 
     if (!token) {
-        return res.redirect('/login.html');
+        return res.redirect('/');
     }
 
     try {
@@ -15,7 +15,7 @@ const verifyToken = (req, res, next) => {
         next();
     } catch (error) {
         res.clearCookie('jwt');
-        return res.redirect('/login.html');
+        return res.redirect('/');
     }
 };
 
