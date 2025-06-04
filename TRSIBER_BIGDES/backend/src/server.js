@@ -37,15 +37,12 @@ const User = require('./models/User');
 // Statik dosyaları /assets path'i üzerinden serve et
 app.use('/assets', express.static(path.join(__dirname, '../../assets')));
 
-// Statik HTML dosyalarını serve et
-app.use(express.static(path.join(__dirname, '../../pages')));
-
-// Ana sayfayı yönlendir (hem / hem de /index.html için)
+// Ana sayfayı (login page) yönlendir (hem / hem de /index.html için) - Bu sayfa korumasız olmalı
 app.get(['/', '/index.html'], (req, res) => {
     res.sendFile(path.join(__dirname, '../../pages/index.html'));
 });
 
-// Korumalı sayfalar için middleware
+// Korumalı sayfalar için middleware ve route'lar - Sadece verifyToken başarılı olursa sayfa serve edilecek
 app.get('/Anasayfa.html', verifyToken, (req, res) => {
     res.sendFile(path.join(__dirname, '../../pages/Anasayfa.html'));
 });
