@@ -46,7 +46,7 @@
                     <p>Dosyayı sürükleyin veya seçin</p>
                     <input type="file" id="fileInput" hidden>
                     <button class="upload-btn" id="openSurveyModalBtn">
-                        Dosya Seç
+                        Denetle
                     </button>
                 </div>
                 <div class="upload-status" style="display: none;">
@@ -64,9 +64,22 @@
         <div class="survey-modal-content">
             <span class="survey-close" id="closeSurveyModal">&times;</span>
             <div class="survey-modal-body">
-                <label for="surveyScore" class="survey-label">Lütfen anket puanınızı giriniz :</label>
-                <input type="number" id="surveyScore" class="survey-input" placeholder="Puanınızı giriniz">
-                <button class="survey-confirm-btn" id="surveyConfirmBtn">Onayla</button>
+                <h2>Denetim Başlat</h2>
+                <div class="form-group">
+                    <label for="surveyScore" class="survey-label">Anket Puanı:</label>
+                    <input type="number" id="surveyScore" class="survey-input" placeholder="Puanınızı giriniz" min="0" max="100">
+                </div>
+                <div class="form-group">
+                    <label for="fileUpload" class="survey-label">Dosya Yükle:</label>
+                    <div class="file-upload-container">
+                        <input type="file" id="fileUpload" class="file-input" accept=".pdf,.doc,.docx">
+                        <label for="fileUpload" class="file-upload-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Dosya Seç</span>
+                        </label>
+                    </div>
+                </div>
+                <button class="survey-confirm-btn" id="surveyConfirmBtn">Kaydet ve Devam Et</button>
             </div>
         </div>
     </div>
@@ -223,44 +236,82 @@
             const surveyModal = document.getElementById('surveyModal');
             const closeSurveyModal = document.getElementById('closeSurveyModal');
             const surveyConfirmBtn = document.getElementById('surveyConfirmBtn');
+            const surveyScoreInput = document.getElementById('surveyScore');
+            const fileUpload = document.getElementById('fileUpload');
+            const fileUploadLabel = document.querySelector('.file-upload-label');
 
-            openSurveyModalBtn.addEventListener('click', (e) => {
+            // Modal'ı aç
+            openSurveyModalBtn.addEventListener('click', () => {
                 surveyModal.style.display = 'flex';
             });
 
+            // Modal'ı kapat
             closeSurveyModal.addEventListener('click', () => {
                 surveyModal.style.display = 'none';
+                resetForm();
             });
 
-            // Modal dışında bir yere tıklayınca kapansın
+            // Modal dışına tıklandığında kapat
             window.addEventListener('click', (e) => {
                 if (e.target === surveyModal) {
                     surveyModal.style.display = 'none';
+                    resetForm();
                 }
             });
 
-            // Onayla butonuna basınca dosya seçme penceresi açılsın
+            // Dosya seçildiğinde
+            fileUpload.addEventListener('change', (e) => {
+                const fileName = e.target.files[0]?.name;
+                if (fileName) {
+                    fileUploadLabel.innerHTML = `
+                        <i class="fas fa-file-alt"></i>
+                        <span>${fileName}</span>
+                    `;
+                }
+            });
+
+            // Anket puanı sadece sayı girilmesini sağla
+            surveyScoreInput.addEventListener('input', (e) => {
+                let value = e.target.value;
+                if (value < 0) value = 0;
+                if (value > 100) value = 100;
+                e.target.value = value;
+            });
+
+            // Kaydet ve Devam Et butonuna tıklandığında
             surveyConfirmBtn.addEventListener('click', () => {
+                const score = surveyScoreInput.value;
+                const file = fileUpload.files[0];
+
+                if (!score) {
+                    alert('Lütfen anket puanını giriniz.');
+                    return;
+                }
+
+                if (!file) {
+                    alert('Lütfen bir dosya seçiniz.');
+                    return;
+                }
+
+                // Burada backend'e veri gönderme işlemi yapılacak
+                console.log('Anket Puanı:', score);
+                console.log('Seçilen Dosya:', file.name);
+
+                // İşlem başarılı olduğunda
+                alert('Denetim başarıyla başlatıldı!');
                 surveyModal.style.display = 'none';
-                fileInput.click();
+                resetForm();
             });
 
-            // Sadece sayı girilmesini sağla
-            const surveyScoreInput = document.getElementById('surveyScore');
-            surveyScoreInput.addEventListener('keydown', function(e) {
-                // Sadece rakam, backspace, delete, tab, ok tuşları
-                if (
-                    // Rakamlar
-                    (e.key >= '0' && e.key <= '9') ||
-                    // Kontrol tuşları
-                    ["Backspace", "Delete", "Tab", "ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)
-                ) {
-                    // izin ver
-                    return;
-                } else {
-                    e.preventDefault();
-                }
-            });
+            // Formu sıfırla
+            function resetForm() {
+                surveyScoreInput.value = '';
+                fileUpload.value = '';
+                fileUploadLabel.innerHTML = `
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span>Dosya Seç</span>
+                `;
+            }
         });
     </script>
 </body>
