@@ -65,7 +65,7 @@
             <span class="survey-close" id="closeSurveyModal">&times;</span>
             <div class="survey-modal-body">
                 <label for="surveyScore" class="survey-label">Lütfen anket puanınızı giriniz :</label>
-                <input type="number" id="surveyScore" class="survey-input" min="1" max="10" placeholder="1-10">
+                <input type="number" id="surveyScore" class="survey-input" placeholder="Puanınızı giriniz">
                 <button class="survey-confirm-btn" id="surveyConfirmBtn">Onayla</button>
             </div>
         </div>
@@ -243,6 +243,23 @@
             surveyConfirmBtn.addEventListener('click', () => {
                 surveyModal.style.display = 'none';
                 fileInput.click();
+            });
+
+            // Sadece sayı girilmesini sağla
+            const surveyScoreInput = document.getElementById('surveyScore');
+            surveyScoreInput.addEventListener('keydown', function(e) {
+                // Sadece rakam, backspace, delete, tab, ok tuşları
+                if (
+                    // Rakamlar
+                    (e.key >= '0' && e.key <= '9') ||
+                    // Kontrol tuşları
+                    ["Backspace", "Delete", "Tab", "ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)
+                ) {
+                    // izin ver
+                    return;
+                } else {
+                    e.preventDefault();
+                }
             });
         });
     </script>
