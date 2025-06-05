@@ -45,7 +45,7 @@
                     <i class="fas fa-cloud-upload-alt"></i>
                     <p>Dosyayı sürükleyin veya seçin</p>
                     <input type="file" id="fileInput" hidden>
-                    <button class="upload-btn" id="openSurveyModalBtn" onclick="document.getElementById('fileInput').click()">
+                    <button class="upload-btn" id="openSurveyModalBtn">
                         Dosya Seç
                     </button>
                 </div>
@@ -222,12 +222,10 @@
             const openSurveyModalBtn = document.getElementById('openSurveyModalBtn');
             const surveyModal = document.getElementById('surveyModal');
             const closeSurveyModal = document.getElementById('closeSurveyModal');
+            const surveyConfirmBtn = document.getElementById('surveyConfirmBtn');
 
             openSurveyModalBtn.addEventListener('click', (e) => {
-                // Dosya seçme işlemi zaten tetikleniyor, modalı da aç
-                setTimeout(() => { // Dosya seçme penceresiyle çakışmaması için
-                    surveyModal.style.display = 'flex';
-                }, 300);
+                surveyModal.style.display = 'flex';
             });
 
             closeSurveyModal.addEventListener('click', () => {
@@ -239,6 +237,12 @@
                 if (e.target === surveyModal) {
                     surveyModal.style.display = 'none';
                 }
+            });
+
+            // Onayla butonuna basınca dosya seçme penceresi açılsın
+            surveyConfirmBtn.addEventListener('click', () => {
+                surveyModal.style.display = 'none';
+                fileInput.click();
             });
         });
     </script>
