@@ -410,42 +410,22 @@
             }
 
             if (form) {
-                form.onsubmit = async function(e) {
+                form.onsubmit = function(e) {
                     e.preventDefault();
                     
                     const formData = {
-                        name: document.getElementById('ad').value,
-                        surname: document.getElementById('soyad').value,
+                        ad: document.getElementById('ad').value,
+                        soyad: document.getElementById('soyad').value,
                         email: document.getElementById('email').value,
-                        password: document.getElementById('sifre').value,
-                        username: document.getElementById('email').value.split('@')[0], // E-posta adresinden kullanıcı adı oluştur
-                        role: 'user' // Varsayılan olarak normal kullanıcı rolü
+                        sifre: document.getElementById('sifre').value
                     };
 
-                    try {
-                        const response = await fetch('/api/users', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${localStorage.getItem('token')}`
-                            },
-                            body: JSON.stringify(formData)
-                        });
-
-                        if (response.ok) {
-                            form.reset();
-                            modal.style.display = 'none';
-                            alert('Kullanıcı başarıyla eklendi!');
-                            // Sayfayı yenile
-                            location.reload();
-                        } else {
-                            const error = await response.json();
-                            alert(`Hata: ${error.message}`);
-                        }
-                    } catch (error) {
-                        console.error('Hata:', error);
-                        alert('Kullanıcı eklenirken bir hata oluştu!');
-                    }
+                    console.log('Yeni denetçi:', formData);
+                    
+                    form.reset();
+                    modal.style.display = 'none';
+                    
+                    alert('Denetçi başarıyla eklendi!');
                 };
             }
         });

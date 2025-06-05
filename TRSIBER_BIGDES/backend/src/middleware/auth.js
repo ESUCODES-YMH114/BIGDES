@@ -2,9 +2,8 @@ const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'gizli-anahtar-buraya';
 
-
 const verifyToken = (req, res, next) => {
-    const token = req.headers.authorization?.split(' ')[1];
+    const token = req.cookies.jwt;
 
     if (!token) {
         return res.redirect('/');
@@ -15,7 +14,7 @@ const verifyToken = (req, res, next) => {
         req.user = decoded;
         next();
     } catch (error) {
-               res.clearCookie('jwt');
+        res.clearCookie('jwt');
         return res.redirect('/');
     }
 };
