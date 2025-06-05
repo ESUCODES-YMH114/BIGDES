@@ -1,21 +1,18 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'gizli-anahtar-buraya';
-
 const verifyToken = (req, res, next) => {
-    const token = req.cookies.jwt;
+    const token = req.headers.authorization?.split(' ')[1];
 
     if (!token) {
-        return res.redirect('/');
+        return res.status(401).json({ message: 'Yetkilendirme token\'ı bulunamadı!' });
     }
 
     try {
-        const decoded = jwt.verify(token, JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'gizli-anahtar');
         req.user = decoded;
         next();
     } catch (error) {
-        res.clearCookie('jwt');
-        return res.redirect('/');
+        return res.status(401).json({ message: 'Geçersiz token!' });
     }
 };
 

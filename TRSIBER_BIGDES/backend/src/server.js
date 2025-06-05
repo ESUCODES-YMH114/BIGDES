@@ -7,6 +7,7 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const verifyToken = require('./middleware/auth');
+const bcryptjs = require('bcryptjs');
 
 const app = express();
 
@@ -126,6 +127,60 @@ app.post('/login', async (req, res) => {
 app.post('/logout', (req, res) => {
     res.clearCookie('jwt');
     res.json({ success: true });
+});
+
+// Kullanıcı ekleme API'si
+app.post('/api/users', verifyToken, async (req, res) => {
+    try {
+        // Admin kontrolü
+        const adminUser = await User.findById(req.user.id);
+        if (!adminUser || adminUser.role !== 'admin') {
+            return res.status(403).json({ message: 'Bu işlem için yetkiniz yok!' });
+        }
+
+        const { name, surname, email, username, password, role } = req.body;
+
+        // E-posta ve kullanıcı adı kontrolü
+        const existingUser = await User.findOne({ 
+            $or: [{ email }, { username }] 
+        });
+
+        if (existingUser) {
+            return res.status(400).json({ 
+                message: 'Bu e-posta adresi veya kullanıcı adı zaten kullanılıyor!' 
+            });
+        }
+
+        // Şifreyi hashle
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Yeni kullanıcı oluştur
+        const newUser = new User({
+            name,
+            surname,
+            email,
+            username,
+            password: hashedPassword,
+            role: role || 'user'
+        });
+
+        await newUser.save();
+
+        res.status(201).json({ 
+            message: 'Kullanıcı başarıyla oluşturuldu',
+            user: {
+                id: newUser._id,
+                name: newUser.name,
+                surname: newUser.surname,
+                email: newUser.email,
+                username: newUser.username,
+                role: newUser.role
+            }
+        });
+    } catch (error) {
+        console.error('Kullanıcı ekleme hatası:', error);
+        res.status(500).json({ message: 'Sunucu hatası!' });
+    }
 });
 
 const PORT = process.env.PORT || 3000;
