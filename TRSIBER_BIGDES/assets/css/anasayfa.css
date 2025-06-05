@@ -399,4 +399,84 @@ body {
     .upload-box {
         padding: 2rem 1rem;
     }
+}
+
+/* Modal (Kart) Stilleri */
+.survey-modal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.35);
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+}
+.survey-modal-content {
+    background: var(--card-bg);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(89, 75, 219, 0.15);
+    padding: 2.5rem 2rem 2rem 2rem;
+    min-width: 320px;
+    max-width: 90vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.survey-modal-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+}
+.survey-label {
+    font-size: 1.1rem;
+    color: #594BDB;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+.survey-input {
+    width: 100px;
+    padding: 0.5rem 1rem;
+    border: 1.5px solid #594BDB;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    text-align: center;
+    outline: none;
+    margin-bottom: 0.5rem;
+}
+.survey-confirm-btn {
+    background-color: #594BDB;
+    color: white;
+    padding: 0.7rem 2.2rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: background 0.2s, box-shadow 0.2s;
+    margin-top: 0.5rem;
+}
+.survey-confirm-btn:hover {
+    background-color: #4a3eb8;
+    box-shadow: 0 4px 16px rgba(89, 75, 219, 0.18);
+}
+.survey-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 1.7rem;
+    color: #594BDB;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.2s;
+    z-index: 10;
+}
+.survey-close:hover {
+    color: #d32f2f;
 } 
